@@ -1,3 +1,6 @@
+
+<img src="https://user-images.githubusercontent.com/29857522/154753154-57587fa4-9366-4bae-ad3b-725a13f24a57.png" width=300 />
+
 # AI_Dog
 Собака с искусственным интеллектом, упрощенная версия сильного ИИ. Если сильный ИИ — уровень человека, то это уровень собаки:) 
 
@@ -11,3 +14,5 @@
 * Развивается во время сна
 * Формирует собственное представление о мире
 * Экземпляры способны эволюционировать 
+
+<img src="https://github.com/AIFramework/AI_Dog/blob/main/img/Logo_and_arts/AI-dog_1.png?raw=true" width=700 />
