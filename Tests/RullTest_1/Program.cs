@@ -15,16 +15,10 @@ namespace RullTest_1
                 new Rule("рассвело", "выключили свет"),
                 new Rule("выключили свет", "уменьшился расход электричества")
             };
-
+            
             // Простейший механизм вывода
             SimpleCalc simpleCalc = new SimpleCalc(rules);
-
-            foreach (Rule item in rules)
-            {
-                Console.WriteLine(item);
-            }
-
-            Console.WriteLine("\n\n");
+            Console.WriteLine(rules.ToStringRules());
 
 
             // Вывод
@@ -32,6 +26,7 @@ namespace RullTest_1
             {
                 string inp = Console.ReadLine();
                 Console.WriteLine(simpleCalc.NextNFerst(inp) + '\n');
+                Console.WriteLine(rules.ToStringRules());
             }
 
         }

@@ -13,6 +13,7 @@ namespace AIDog.Rules
         public SimpleCalc(Rule[] rules) 
         {
             Rules = rules;
+            Rules.EvalutionApriori();
         }
 
          /// <summary>
@@ -21,10 +22,14 @@ namespace AIDog.Rules
          /// <param name="start">Начало</param>
         public string NextFerst(string start) 
         {
+            Rules.EvalutionApriori();
             for (int i = 0; i < Rules.Length; i++)
             {
                 if (start == Rules[i].IF)
+                {
+                    Rules[i].CountActiv++;
                     return Rules[i].THEN;
+                }
             }
 
             return string.Empty;
@@ -39,10 +44,11 @@ namespace AIDog.Rules
             string inp = start;
             for (int i = 0; i < n; i++)
             {
-                if (NextFerst(inp) == string.Empty)
+                string next = NextFerst(inp);
+                if (next == string.Empty)
                     break;
 
-                inp = NextFerst(inp);
+                inp = next;
             }
 
             return inp;

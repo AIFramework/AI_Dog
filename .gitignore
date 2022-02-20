@@ -2,3 +2,5 @@
 .vs/Core/v16/.suo
 Core/.vs/AIDogs.Rules/v16/.suo
 *.pdb
+Tests/RullTest_1/obj/*
+Core/AIDogs.Rules/obj/*
