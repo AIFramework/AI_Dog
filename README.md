@@ -1,5 +1,5 @@
 
-<img src="https://user-images.githubusercontent.com/29857522/154753154-57587fa4-9366-4bae-ad3b-725a13f24a57.png" width=150 />
+<img src="https://github.com/AIFramework/AI_Dog/blob/main/img/Logo_and_arts/AI_dog.png?raw=true" width=150 />
 
 # AI Dog
 Собака с искусственным интеллектом, упрощенная версия сильного ИИ.
