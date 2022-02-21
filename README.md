@@ -17,6 +17,8 @@
 
 <img src="https://github.com/AIFramework/AI_Dog/blob/main/img/Logo_and_arts/AI-dog_1.png?raw=true" width=400 />
 
+* [Подробное описание проекта](https://github.com/AIFramework/AI_Dog/wiki/AI-Dog)
+
 ****
 
 *  [Проект разрабатывается на базе AIFramework 2.2 Open](https://github.com/AIFramework/AIFrameworkOpen) <img src="https://github.com/AIFramework/AIFrameworkOpen/blob/main/Docs/img/logo.png?raw=true" width=30 />
