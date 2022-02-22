@@ -69,6 +69,77 @@ namespace AIDog.Graphs.BaseGraph
             }
             return verts.ToArray(); 
         }
+        
+        /// <summary>
+        /// Вывод связанных вершин
+        /// </summary>
+        /// <param name="verts">Вершины, для которой ищем связи</param>
+        public int[] Adj(int[] verts)
+        {
+            List<int> adjV = new List<int>();
+            for (int i = 0; i < verts.Length; i++)
+            {
+                adjV.AddRange(Adj(verts[i]));
+            }
+
+            return adjV.ToArray();
+        }
+
+        /// <summary>
+        /// Вектор весов связных вершин
+        /// </summary>
+        /// <param name="vertex">Вершина</param>
+        /// <param name="adj">Связные</param>
+        public Vector W(int vertex, int[] adj)
+        {
+            Vector vector = new Vector(adj.Length);
+
+            for (int i = 0; i < adj.Length; i++)
+                 vector[i] = GetW(vertex, adj[i]);
+            
+            return vector;
+        }
+
+        // ToDo: Доработать раннюю остановку
+        /// <summary>
+        /// Выдает конечные вершины через k шагов, возвращает вершины и вектор вероятностей
+        /// </summary>
+        /// <returns></returns>
+        public Tuple<int[], Vector> GetVertexForKStep(int startVertex, int kStep=2) 
+        {
+            if (kStep == 0)
+                return new Tuple<int[], Vector>(new[] { startVertex }, new Vector(1.0));
+
+            int[] adj = Adj(startVertex);
+            int[] endVert = new int[adj.Length];
+            Array.Copy(adj, endVert, adj.Length);
+
+            Vector adjVect = W(startVertex, endVert), 
+                endVect = adjVect.Clone();
+
+            for (int i = 1; i < kStep; i++) // Проход на к-шагов
+            {
+                adj = Adj(endVert); // Получение связанных вершин
+                if (adj.Length == 0) // Условие ранней остановки
+                {
+                    endVect /= endVect.Sum();
+                    return new Tuple<int[], Vector>(endVert, endVect);
+                }
+
+                adjVect = endVect[0]*W(endVert[0], adj);
+                for (int j = 1; j < endVert.Length; j++)
+                {
+                    adjVect += endVect[j] * W(endVert[j], adj); // Расчет вероятностей по графу
+                }
+
+                endVect = adjVect.Clone();
+                endVert = new int[adj.Length];
+                Array.Copy(adj, endVert, adj.Length);
+            }
+
+            endVect /= endVect.Sum();
+            return new Tuple<int[], Vector>(endVert, endVect);
+        }
 
         /// <summary>
         /// Степень вершины в графе(число связей)
@@ -118,5 +189,6 @@ namespace AIDog.Graphs.BaseGraph
 
             return count;
         }
+
     }
 }

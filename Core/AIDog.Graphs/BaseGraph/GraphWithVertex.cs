@@ -113,6 +113,39 @@ namespace AIDog.Graphs.BaseGraph
         }
 
         /// <summary>
+        /// Выдает конечные вершины через k шагов, возвращает вершины и вектор вероятностей
+        /// </summary>
+        public Tuple<Vertex[], Vector> GetVertexForKStep(Vertex startVertex, int kStep = 2)
+        {
+            int ind = GetVertexIndex(startVertex);
+            var vertsVect = MainGraph.GetVertexForKStep(ind, kStep);
+            int[] inds = vertsVect.Item1;
+            Vertex[] vertices = new Vertex[inds.Length];
+
+            for (int i = 0; i < vertices.Length; i++)
+                vertices[i] = Vertices[inds[i]];
+
+            return new Tuple<Vertex[], Vector>(vertices, vertsVect.Item2);
+        }
+
+        /// <summary>
+        /// Выдает конечные вершины через k шагов, возвращает вершины и вектор вероятностей
+        /// </summary>
+        public Tuple<string[], Vector> GetVertexForKStep(string startVertex, int kStep = 2)
+        {
+            Vertex vertex = Vertex.FromName(Vertices, startVertex);
+            int ind = GetVertexIndex(vertex);
+            var vertsVect = MainGraph.GetVertexForKStep(ind, kStep);
+            int[] inds = vertsVect.Item1;
+            string[] vertices = new string[inds.Length];
+
+            for (int i = 0; i < vertices.Length; i++)
+                vertices[i] = Vertices[inds[i]].Name;
+
+            return new Tuple<string[], Vector>(vertices, vertsVect.Item2);
+        }
+
+        /// <summary>
         /// Связные вершины
         /// </summary>
         /// <param name="vertex">Вершина истока</param>
