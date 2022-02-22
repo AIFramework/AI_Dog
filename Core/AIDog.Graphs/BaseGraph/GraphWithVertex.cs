@@ -23,21 +23,21 @@ namespace AIDog.Graphs.BaseGraph
         /// </summary>
         /// <param name="vertices">Вершины</param>
         /// <param name="graph">Базовый граф</param>
-        public GraphWithVertex(Graph graph, Vertex[] vertices) 
+        public GraphWithVertex(Graph graph, IEnumerable<Vertex> vertices) 
         {
             MainGraph = graph;
-            Vertices = vertices;
+            Vertices = vertices.ToArray();
         }
 
         /// <summary>
         /// Граф без связей с вершинами
         /// </summary>
         /// <param name="vertices">Вершины</param>
-        public GraphWithVertex(Vertex[] vertices) 
+        public GraphWithVertex(IEnumerable<Vertex> vertices) 
         {
-            int n = vertices.Length;
-            MainGraph = new Graph(n);
-            Vertices = vertices;
+            Vertices = vertices.ToArray();
+            MainGraph = new Graph(Vertices.Length);
+            
         }
 
         /// <summary>
@@ -94,6 +94,38 @@ namespace AIDog.Graphs.BaseGraph
 
             return laplassian / (inds.Length + 1);
             
+        }
+
+        /// <summary>
+        /// Связные вершины
+        /// </summary>
+        /// <param name="vertex">Вершина истока</param>
+        public Vertex[] Adj(Vertex vertex)
+        {
+            int ind = GetVertexIndex(vertex);
+            int[] inds = MainGraph.Adj(ind);
+            Vertex[] vertices = new Vertex[inds.Length];
+
+            for (int i = 0; i < vertices.Length; i++)
+                vertices[i] = Vertices[inds[i]];
+
+            return vertices;
+        }
+
+        /// <summary>
+        /// Связные вершины
+        /// </summary>
+        /// <param name="vertex">Вершина истока</param>
+        public string[] Adj(string name)
+        {
+            Vertex vertex = Vertex.FromName(Vertices, name);
+            Vertex[] vertices = Adj(vertex);
+            string[] names = new string[vertices.Length];
+
+            for (int i = 0; i < vertices.Length; i++)
+                names[i] = vertices[i].Name;
+
+            return names;
         }
     }
 }

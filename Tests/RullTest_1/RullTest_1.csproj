@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\AIDog.Graphs\AIDog.Graphs.csproj">
+      <Project>{090DB41A-EFC8-4B02-B6EC-68511BF9EEB8}</Project>
+      <Name>AIDog.Graphs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\AIDogs.Rules\AIDog.Rules.csproj">
       <Project>{52615efe-c6e7-49af-9f82-94ce5d18b4c4}</Project>
       <Name>AIDog.Rules</Name>
