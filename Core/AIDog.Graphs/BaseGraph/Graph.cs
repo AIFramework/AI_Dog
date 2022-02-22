@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AI.DataStructs.Algebraic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace AIDog.Graphs.BaseGraph
         /// <summary>
         /// Матрица смежности
         /// </summary>
-        double[,] _adjMatrix { get; set; }
+        Matrix _adjMatrix { get; set; }
 
         /// <summary>
         /// Создание графа
@@ -22,7 +23,7 @@ namespace AIDog.Graphs.BaseGraph
         /// <param name="nV">Число вершин</param>
         public Graph(int nV) 
         {
-            _adjMatrix = new double[nV, nV];
+            _adjMatrix = new Matrix(nV, nV);
             NumberOfVertex = nV;
         }
 
