@@ -46,12 +46,12 @@ namespace AIDog.Graphs.BaseGraph
         /// </summary>
         /// <param name="v1">Исток</param>
         /// <param name="v2">Сток</param>
-        public void DeleteArc(int v1, int v2) { AddSetArc(v1, v2, 0); }
+        public void DeleteArc(int v1, int v2, bool isNormal = true) { AddSetArc(v1, v2, 0); }
 
         /// <summary>
         /// Получение силы связей 2х вершин
         /// </summary>
-        public double GetW(int v1, int v2)
+        public double GetW(int v1, int v2, bool isNormal = true)
         {
             return _adjMatrix[v1, v2];
         }
@@ -90,7 +90,7 @@ namespace AIDog.Graphs.BaseGraph
         /// </summary>
         /// <param name="vertex">Вершина</param>
         /// <param name="adj">Связные</param>
-        public Vector W(int vertex, int[] adj)
+        public Vector W(int vertex, int[] adj, bool isNormal = true)
         {
             Vector vector = new Vector(adj.Length);
 
@@ -105,28 +105,31 @@ namespace AIDog.Graphs.BaseGraph
         /// Выдает конечные вершины через k шагов, возвращает вершины и вектор вероятностей
         /// </summary>
         /// <returns></returns>
-        public Tuple<int[], Vector> GetVertexForKStep(int startVertex, int kStep=2) 
+        public Tuple<int[], Vector> GetVertexForKStep(int[] startVertex, int kStep = 2, bool isNormal = true)
         {
             if (kStep == 0)
-                return new Tuple<int[], Vector>(new[] { startVertex }, new Vector(1.0));
+                return new Tuple<int[], Vector>(startVertex, new Vector(startVertex.Length)+(1.0/startVertex.Length));
 
             int[] adj = Adj(startVertex);
             int[] endVert = new int[adj.Length];
             Array.Copy(adj, endVert, adj.Length);
 
-            Vector adjVect = W(startVertex, endVert), 
-                endVect = adjVect.Clone();
+            Vector adjVect = W(startVertex[0], endVert),
+                endVect;
+
+            // Заполнение вектора
+            for (int i = 1; i < startVertex.Length; i++)
+                adjVect += W(startVertex[i], endVert);
+
+            endVect = adjVect.Clone();
 
             for (int i = 1; i < kStep; i++) // Проход на к-шагов
             {
                 adj = Adj(endVert); // Получение связанных вершин
                 if (adj.Length == 0) // Условие ранней остановки
-                {
-                    endVect /= endVect.Sum();
-                    return new Tuple<int[], Vector>(endVert, endVect);
-                }
+                    return Postprocessing(endVect, endVert, isNormal); 
 
-                adjVect = endVect[0]*W(endVert[0], adj);
+                adjVect = endVect[0] * W(endVert[0], adj);
                 for (int j = 1; j < endVert.Length; j++)
                 {
                     adjVect += endVect[j] * W(endVert[j], adj); // Расчет вероятностей по графу
@@ -137,8 +140,43 @@ namespace AIDog.Graphs.BaseGraph
                 Array.Copy(adj, endVert, adj.Length);
             }
 
-            endVect /= endVect.Sum();
-            return new Tuple<int[], Vector>(endVert, endVect);
+
+            return Postprocessing(endVect, endVert, isNormal);
+        }
+
+        // Пост обработка, нормализация, устранение дублирования вешин
+        private Tuple<int[], Vector> Postprocessing(Vector endVect, int[] endVert, bool isNormal = true) 
+        {
+            List<int> vertices = new List<int>();
+            foreach (var item in endVert)
+            {
+                if (!vertices.Contains(item))
+                    vertices.Add(item);
+            }
+
+            Vector vectOut = new Vector(vertices.Count);
+
+            for (int i = 0; i < endVect.Count; i++)
+            {
+                int ind = -1;
+                for (int j = 0; j < vertices.Count; j++)
+                    if (vertices[j] == endVert[i]) ind = j;
+
+                vectOut[ind] += endVect[i];
+            }
+
+            if(isNormal) vectOut /= vectOut.Sum();
+            return new Tuple<int[], Vector>(vertices.ToArray(), vectOut);
+        }
+
+        /// <summary>
+        /// Выдает конечные вершины через k шагов, возвращает вершины и вектор вероятностей
+        /// </summary>
+        /// <returns></returns>
+        public Tuple<int[], Vector> GetVertexForKStep(int startVertex, int kStep = 2, bool isNormal = true)
+        {
+            int[] v = { startVertex};
+            return GetVertexForKStep(v, kStep);
         }
 
         /// <summary>
@@ -146,7 +184,7 @@ namespace AIDog.Graphs.BaseGraph
         /// </summary>
         /// <param name="g">Граф</param>
         /// <param name="vertex">Номер вершины</param>
-        public static int Degree(Graph g, int vertex)
+        public static int Degree(Graph g, int vertex, bool isNormal = true)
         {
             return g.Adj(vertex).Length;
         }

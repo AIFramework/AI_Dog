@@ -128,6 +128,28 @@ namespace AIDog.Graphs.BaseGraph
             return new Tuple<Vertex[], Vector>(vertices, vertsVect.Item2);
         }
 
+
+        /// <summary>
+        /// Выдает конечные вершины через k шагов, возвращает вершины и вектор вероятностей
+        /// </summary>
+        public Tuple<Vertex[], Vector> GetVertexForKStep(Vertex[] startVertex, int kStep = 2)
+        {
+            int[] ind_vs = new int[startVertex.Length];
+            for (int i = 0; i < ind_vs.Length; i++)
+            {
+                ind_vs[i] = GetVertexIndex(startVertex[i]);
+            }
+
+            var vertsVect = MainGraph.GetVertexForKStep(ind_vs, kStep);
+            int[] inds = vertsVect.Item1;
+            Vertex[] vertices = new Vertex[inds.Length];
+
+            for (int i = 0; i < vertices.Length; i++)
+                vertices[i] = Vertices[inds[i]];
+
+            return new Tuple<Vertex[], Vector>(vertices, vertsVect.Item2);
+        }
+
         /// <summary>
         /// Выдает конечные вершины через k шагов, возвращает вершины и вектор вероятностей
         /// </summary>
@@ -136,6 +158,28 @@ namespace AIDog.Graphs.BaseGraph
             Vertex vertex = Vertex.FromName(Vertices, startVertex);
             int ind = GetVertexIndex(vertex);
             var vertsVect = MainGraph.GetVertexForKStep(ind, kStep);
+            int[] inds = vertsVect.Item1;
+            string[] vertices = new string[inds.Length];
+
+            for (int i = 0; i < vertices.Length; i++)
+                vertices[i] = Vertices[inds[i]].Name;
+
+            return new Tuple<string[], Vector>(vertices, vertsVect.Item2);
+        }
+
+        /// <summary>
+        /// Выдает конечные вершины через k шагов, возвращает вершины и вектор вероятностей
+        /// </summary>
+        public Tuple<string[], Vector> GetVertexForKStep(string[] startVertex, int kStep = 2)
+        {
+            int[] ind_vs = new int[startVertex.Length];
+            for (int i = 0; i < ind_vs.Length; i++)
+            {
+                Vertex vertex = Vertex.FromName(Vertices, startVertex[i]);
+                ind_vs[i] = GetVertexIndex(vertex);
+            }
+            
+            var vertsVect = MainGraph.GetVertexForKStep(ind_vs, kStep);
             int[] inds = vertsVect.Item1;
             string[] vertices = new string[inds.Length];
 
