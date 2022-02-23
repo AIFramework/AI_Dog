@@ -48,7 +48,8 @@ namespace OneDPrep
 
             scatter.Clear();
             scatter.AddScatter(y_3, y_2, "distr data_1", Color.Gray);
-            scatter.AddScatter(y_1, y_2, "distr data", Color.Black);
+            scatter.AddScatter(y_1, y_2, "distr data_2", Color.Black);
+            scatter.AddScatter(y_2, y_3, "distr data_3", Color.DarkGray);
 
         }
     }
