@@ -30,7 +30,7 @@ namespace OneDPrep
 
         private void fps_Tick(object sender, EventArgs e)
         {
-            Vector vector = new[] { mX, mY, Math.Sqrt(mY * mX) };
+            Vector vector = new[] { mX, mY, mY * mX/200, mY/mX };
             vector = AIDog.DataPrep.Base.Lateral.GetContrast(vector);
             Vectors.Add(vector);
             Vector x = Vector.SeqBeginsWithZero(1, Vectors.Count);
@@ -40,16 +40,17 @@ namespace OneDPrep
             var y_1 = vArr.GetDimention(0);
             var y_2 = vArr.GetDimention(1);
             var y_3 = vArr.GetDimention(2);
+            var y_4 = vArr.GetDimention(3);
 
             plotSignal.Clear();
             plotSignal.AddPlot(x, y_1, "x");
             plotSignal.AddPlot(x, y_2, "y");
             plotSignal.AddPlot(x, y_3, "z");
+            plotSignal.AddPlot(x, y_4, "k");
 
             scatter.Clear();
             scatter.AddScatter(y_3, y_2, "distr data_1", Color.Gray);
             scatter.AddScatter(y_1, y_2, "distr data_2", Color.Black);
-            scatter.AddScatter(y_2, y_3, "distr data_3", Color.DarkGray);
 
         }
     }

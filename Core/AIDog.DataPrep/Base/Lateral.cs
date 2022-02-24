@@ -18,11 +18,11 @@ namespace AIDog.DataPrep.Base
         /// </summary>
         /// <param name="inp">Вход</param>
         /// <param name="coef">Коэф. контраста</param>
-        public static Vector GetContrast(Vector inp, double coef = 5) 
+        public static Vector GetContrast(Vector inp, double coef = 10) 
         {
             Vector centr = inp - inp.Mean();
-            double denom = inp.Transform(Math.Abs).Sum() + AI.AISettings.GlobalEps;
-            return ActivationFunctions.Sigmoid(centr / denom, coef);
+            double denom = centr.Transform(Math.Abs).Sum() + AI.AISettings.GlobalEps;
+            return ActivationFunctions.SigmoidBiplyar(centr / denom, coef);
         }
     }
 }
