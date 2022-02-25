@@ -1,13 +1,10 @@
 ﻿using AI.DataStructs.Algebraic;
+using AI.Extensions;
+using AI.ML.Clustering;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using AI.Extensions;
 
 
 namespace OneDPrep
@@ -19,8 +16,21 @@ namespace OneDPrep
             InitializeComponent();
         }
 
-        List<Vector> Vectors = new List<Vector>();
-        double mX = 0, mY = 0;
+        private readonly List<Vector> Vectors = new List<Vector>();
+        private double mX = 0, mY = 0;
+        private int iter = 0;
+        private readonly IClustering clustering = new KMeans(5);
+        private readonly int modeler = 130;
+        private readonly Vector c1y1 = new Vector(0);
+        private readonly Vector c1y2 = new Vector(0);
+        private readonly Vector c2y1 = new Vector(0);
+        private readonly Vector c2y2 = new Vector(0);
+        private readonly Vector c3y1 = new Vector(0);
+        private readonly Vector c3y2 = new Vector(0);
+        private readonly Vector c4y1 = new Vector(0);
+        private readonly Vector c4y2 = new Vector(0);
+        private readonly Vector c5y1 = new Vector(0);
+        private readonly Vector c5y2 = new Vector(0);
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -28,30 +38,79 @@ namespace OneDPrep
             mY = e.Y;
         }
 
+        // Тики
         private void fps_Tick(object sender, EventArgs e)
         {
-            Vector vector = new[] { mX, mY, mY * mX/200, mY/mX };
+            Vector vector = new[] { mX, mY, mX * mX / 200 };
             vector = AIDog.DataPrep.Base.Lateral.GetContrast(vector);
             Vectors.Add(vector);
             Vector x = Vector.SeqBeginsWithZero(1, Vectors.Count);
             Classes.BarBlack(vector);
-            
-            var vArr = Vectors.ToArray();
-            var y_1 = vArr.GetDimention(0);
-            var y_2 = vArr.GetDimention(1);
-            var y_3 = vArr.GetDimention(2);
-            var y_4 = vArr.GetDimention(3);
+
+            Vector[] vArr = Vectors.ToArray();
+            Vector y_1 = vArr.GetDimention(0);
+            Vector y_2 = vArr.GetDimention(1);
+            Vector y_3 = vArr.GetDimention(2);
 
             plotSignal.Clear();
             plotSignal.AddPlot(x, y_1, "x");
             plotSignal.AddPlot(x, y_2, "y");
             plotSignal.AddPlot(x, y_3, "z");
-            plotSignal.AddPlot(x, y_4, "k");
 
             scatter.Clear();
-            scatter.AddScatter(y_3, y_2, "distr data_1", Color.Gray);
-            scatter.AddScatter(y_1, y_2, "distr data_2", Color.Black);
+            //int cl = iter < modeler ? kohonen.Classify(vector) : kohonen.ClassifyAndTrain(vector);
+            int cl = iter < modeler + 2 ? 3 : clustering.Classify(vector);
 
+            // Условие обучения кластеризатора
+            if (iter++ == modeler)
+            {
+                clustering.Train(vArr, 2);
+            }
+
+            ShowScatter(cl, vector); // Показать скаттерограмму
+
+        }
+
+
+        // ----------------------------------------------------------------------------//
+        // Показать скаттерограмму
+        private void ShowScatter(int cl, Vector vector)
+        {
+            if (iter > modeler)
+            {
+                if (cl == 0)
+                {
+                    c1y1.Add(vector[0]);
+                    c1y2.Add(vector[1]);
+                }
+                if (cl == 1)
+                {
+                    c2y1.Add(vector[0]);
+                    c2y2.Add(vector[1]);
+                }
+                if (cl == 2)
+                {
+                    c3y1.Add(vector[0]);
+                    c3y2.Add(vector[1]);
+                }
+                if (cl == 3)
+                {
+                    c4y1.Add(vector[0]);
+                    c4y2.Add(vector[1]);
+                }
+                if (cl == 4)
+                {
+                    c5y1.Add(vector[0]);
+                    c5y2.Add(vector[1]);
+                }
+
+                scatter.Clear();
+                scatter.AddScatter(c1y1, c1y2, "distr data_1", Color.Red);
+                scatter.AddScatter(c2y1, c2y2, "distr data_2", Color.Green);
+                scatter.AddScatter(c3y1, c3y2, "distr data_3", Color.Blue);
+                scatter.AddScatter(c4y1, c4y2, "distr data_4", Color.Gray);
+                scatter.AddScatter(c5y1, c5y2, "distr data_5", Color.Black);
+            }
         }
     }
 }

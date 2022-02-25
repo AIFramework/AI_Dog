@@ -48,9 +48,9 @@ namespace RullTest_1
                 Console.WriteLine();
                 try
                 {
-                    var dat = logic.MainGraph.GetVertexForKStep(inp);
-                    var n = dat.Item1;
-                    var v = dat.Item2;
+                    Tuple<string[], AI.DataStructs.Algebraic.Vector> dat = logic.MainGraph.GetVertexForKStep(inp);
+                    string[] n = dat.Item1;
+                    AI.DataStructs.Algebraic.Vector v = dat.Item2;
 
                     for (int i = 0; i < n.Length; i++)
                     {
