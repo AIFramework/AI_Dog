@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AI">
-      <HintPath>..\..\Binary\Release\net472\AI.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\AIFr\AIFrameworkOpen\AI\AI.csproj">
+      <Project>{3c3edbb1-0c56-4a12-8cf5-8bca80df2d81}</Project>
+      <Name>AI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\AIDog.Graphs\AIDog.Graphs.csproj">
       <Project>{090DB41A-EFC8-4B02-B6EC-68511BF9EEB8}</Project>
       <Name>AIDog.Graphs</Name>

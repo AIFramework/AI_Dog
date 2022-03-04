@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AI">
-      <HintPath>..\..\Binary\Release\net472\AI.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,7 +44,27 @@
     <Compile Include="Base\Lateral.cs" />
     <Compile Include="Base\Seq1D\AGC.cs" />
     <Compile Include="Base\Seq1D\LinearPrediction.cs" />
+    <Compile Include="filters.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>filters.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="filters.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>filters.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filter_mean_std" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AIFr\AIFrameworkOpen\AI\AI.csproj">
+      <Project>{3c3edbb1-0c56-4a12-8cf5-8bca80df2d81}</Project>
+      <Name>AI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

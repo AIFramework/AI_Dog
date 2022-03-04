@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AI">
-      <HintPath>..\..\Binary\Release\net472\AI.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +45,12 @@
     <Compile Include="BaseGraph\GraphWithVertex.cs" />
     <Compile Include="BaseGraph\Vertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AIFr\AIFrameworkOpen\AI\AI.csproj">
+      <Project>{3c3edbb1-0c56-4a12-8cf5-8bca80df2d81}</Project>
+      <Name>AI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

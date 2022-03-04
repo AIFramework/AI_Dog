@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0FF42327-0EB4-4CF0-9809-B90A32ED7ED2}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>OneDPrep</RootNamespace>
     <AssemblyName>OneDPrep</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -32,11 +32,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AI, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Binary\Release\net472\AI.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
@@ -85,6 +84,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\AIFr\AIFrameworkOpen\AI\AI.csproj">
+      <Project>{3c3edbb1-0c56-4a12-8cf5-8bca80df2d81}</Project>
+      <Name>AI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\AIDog.DataPrep\AIDog.DataPrep.csproj">
       <Project>{763cc551-6fda-4796-8ef4-f630bea8f14c}</Project>
       <Name>AIDog.DataPrep</Name>
