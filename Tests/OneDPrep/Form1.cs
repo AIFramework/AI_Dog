@@ -15,9 +15,9 @@ namespace OneDPrep
         public Form1()
         {
             InitializeComponent();
-            aGC1 = new AGC("filter_mean_std");
-            aGC2 = new AGC("filter_mean_std");
-            aGC3 = new AGC("filter_mean_std");
+            aGC1 = new AGC();
+            aGC2 = new AGC();
+            aGC3 = new AGC();
         }
         AGC aGC1, aGC2, aGC3;
         private readonly List<Vector> Vectors = new List<Vector>();
@@ -50,7 +50,7 @@ namespace OneDPrep
                 aGC2.Calculate(mY), 
                 aGC3.Calculate(mX * mX) };
             
-            vector = Lateral.GetContrast(vector);
+           // vector = Lateral.GetContrast(vector);
             Vectors.Add(vector);
             Vector x = Vector.SeqBeginsWithZero(1, Vectors.Count);
             Classes.BarBlack(vector);

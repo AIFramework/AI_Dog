@@ -29,12 +29,12 @@ namespace AIDog.DataPrep.Base
             IIRFilterSTD = IIRFilter.Load(path);
             //Treshold = 100;
         }
-        // Зделать
-        //public AGC()
-        //{
-        //    IIRFilterMean = IIRFilter.Load(filters.ResourceManager.GetString("filter_mean_std"));
-        //    IIRFilterSTD = IIRFilter.Load(filters.ResourceManager.GetString("filter_mean_std"));
-        //}
+        
+        public AGC()
+        {
+            IIRFilterMean = IIRFilter.Load(filters.filter_mean_std);
+            IIRFilterSTD = IIRFilter.Load(filters.filter_mean_std);
+        }
 
         public AGC(Vector kefA, Vector kefB)
         {

@@ -61,8 +61,8 @@
     <None Include="Resources\filter_mean_std" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\AIFr\AIFrameworkOpen\AI\AI.csproj">
-      <Project>{3c3edbb1-0c56-4a12-8cf5-8bca80df2d81}</Project>
+    <ProjectReference Include="..\..\..\AIFrameworkOpen\AI\AI.csproj">
+      <Project>{5bb9b8ac-9906-4fd7-a8e6-5eb202fb57a1}</Project>
       <Name>AI</Name>
     </ProjectReference>
   </ItemGroup>
