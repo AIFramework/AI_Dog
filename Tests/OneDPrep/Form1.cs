@@ -2,6 +2,7 @@
 using AI.Extensions;
 using AI.ML.Clustering;
 using AIDog.DataPrep.Base;
+using AIDog.DataPrep.Base.Seq1D;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -15,11 +16,12 @@ namespace OneDPrep
         public Form1()
         {
             InitializeComponent();
-            aGC1 = new AGC();
-            aGC2 = new AGC();
-            aGC3 = new AGC();
+            ava.Update += Ava_Update;
         }
-        AGC aGC1, aGC2, aGC3;
+
+        
+
+        AGCVectorAction ava = new AGCVectorAction(3);
         private readonly List<Vector> Vectors = new List<Vector>();
         private double mX = 0, mY = 0;
         private int iter = 0;
@@ -45,12 +47,13 @@ namespace OneDPrep
         // Тики
         private void fps_Tick(object sender, EventArgs e)
         {
-            Vector vector = new[] { 
-                aGC1.Calculate(mX), 
-                aGC2.Calculate(mY), 
-                aGC3.Calculate(mX * mX) };
-            
-           // vector = Lateral.GetContrast(vector);
+            ava.PushSignal(new Vector(mX, mY, mX * mX));
+        }
+
+        // Сигнал после прореживания
+        private void Ava_Update(Vector vector)
+        {
+            vector = Lateral.GetContrast(vector);
             Vectors.Add(vector);
             Vector x = Vector.SeqBeginsWithZero(1, Vectors.Count);
             Classes.BarBlack(vector);
@@ -76,9 +79,7 @@ namespace OneDPrep
             }
 
             ShowScatter(cl, vector); // Показать скаттерограмму
-
         }
-
 
         // ----------------------------------------------------------------------------//
         // Показать скаттерограмму

@@ -2,7 +2,7 @@
 using AI.DSP.IIR;
 using System;
 
-namespace AIDog.DataPrep.Base
+namespace AIDog.DataPrep.Base.Seq1D
 {
     public class AGC
     {
@@ -32,8 +32,8 @@ namespace AIDog.DataPrep.Base
         
         public AGC()
         {
-            IIRFilterMean = IIRFilter.Load(filters.filter_mean_std);
-            IIRFilterSTD = IIRFilter.Load(filters.filter_mean_std);
+            IIRFilterMean = IIRFilter.Load(filters.filter);
+            IIRFilterSTD = IIRFilter.Load(filters.filter);
         }
 
         public AGC(Vector kefA, Vector kefB)

@@ -56,7 +56,7 @@ namespace OneDPrep
             // fps
             // 
             this.fps.Enabled = true;
-            this.fps.Interval = 50;
+            this.fps.Interval = 30;
             this.fps.Tick += new System.EventHandler(this.fps_Tick);
             // 
             // Classes
@@ -119,17 +119,17 @@ namespace OneDPrep
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Flubber", 16F, System.Drawing.FontStyle.Bold);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.Blue;
             this.label1.Location = new System.Drawing.Point(8, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(167, 23);
+            this.label1.Size = new System.Drawing.Size(195, 26);
             this.label1.TabIndex = 4;
             this.label1.Text = "Погладь песика:";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1111, 665);
@@ -138,7 +138,7 @@ namespace OneDPrep
             this.Controls.Add(this.plotSignal);
             this.Controls.Add(this.Classes);
             this.Controls.Add(this.pictureBox1);
-            this.Font = new System.Drawing.Font("Flubber", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

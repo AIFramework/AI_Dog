@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Base\Lateral.cs" />
     <Compile Include="Base\Seq1D\AGC.cs" />
+    <Compile Include="Base\Seq1D\AGCVectorAction.cs" />
     <Compile Include="Base\Seq1D\LinearPrediction.cs" />
     <Compile Include="filters.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -58,6 +59,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\filter" />
     <None Include="Resources\filter_mean_std" />
   </ItemGroup>
   <ItemGroup>
