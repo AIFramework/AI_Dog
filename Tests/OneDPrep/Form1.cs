@@ -3,6 +3,7 @@ using AI.Extensions;
 using AI.ML.Clustering;
 using AIDog.DataPrep.Base;
 using AIDog.DataPrep.Base.Seq1D;
+using AIDog.DataPrep.WordGeneration;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -22,10 +23,12 @@ namespace OneDPrep
         
 
         AGCVectorAction ava = new AGCVectorAction(3);
+        WordFromVectors wfv;
+        bool isInitW = false;
         private readonly List<Vector> Vectors = new List<Vector>();
         private double mX = 0, mY = 0;
         private int iter = 0;
-        private readonly IClustering clustering = new KMeans(5);
+        private readonly KMeans clustering = new KMeans(5);
         private readonly int modeler = 130;
         private readonly Vector c1y1 = new Vector(0);
         private readonly Vector c1y2 = new Vector(0);
@@ -69,7 +72,6 @@ namespace OneDPrep
             plotSignal.AddPlot(x, y_3, "z");
 
             scatter.Clear();
-            //int cl = iter < modeler ? kohonen.Classify(vector) : kohonen.ClassifyAndTrain(vector);
             int cl = iter < modeler + 2 ? 3 : clustering.Classify(vector);
 
             // Условие обучения кластеризатора
@@ -87,6 +89,15 @@ namespace OneDPrep
         {
             if (iter > modeler)
             {
+                if (!isInitW) 
+                {
+                    wfv = new WordFromVectors(clustering.Сentroids);
+                    isInitW = true;
+                }
+
+                listBox1.Items.Add(wfv.GetWord(vector));
+
+
                 if (cl == 0)
                 {
                     c1y1.Add(vector[0]);
@@ -121,5 +132,7 @@ namespace OneDPrep
                 scatter.AddScatter(c5y1, c5y2, "distr data_5", Color.Black);
             }
         }
+
+
     }
 }

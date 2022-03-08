@@ -37,6 +37,7 @@ namespace OneDPrep
             this.plotSignal = new AI.Charts.Control.ChartVisual();
             this.scatter = new AI.Charts.Control.ChartVisual();
             this.label1 = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,7 +95,7 @@ namespace OneDPrep
             this.plotSignal.LabelY = "Значение сигнала";
             this.plotSignal.Location = new System.Drawing.Point(12, 390);
             this.plotSignal.Name = "plotSignal";
-            this.plotSignal.Size = new System.Drawing.Size(1087, 267);
+            this.plotSignal.Size = new System.Drawing.Size(1072, 267);
             this.plotSignal.TabIndex = 2;
             // 
             // scatter
@@ -113,7 +114,7 @@ namespace OneDPrep
             this.scatter.LabelY = "y";
             this.scatter.Location = new System.Drawing.Point(642, 0);
             this.scatter.Name = "scatter";
-            this.scatter.Size = new System.Drawing.Size(457, 383);
+            this.scatter.Size = new System.Drawing.Size(442, 383);
             this.scatter.TabIndex = 3;
             // 
             // label1
@@ -127,12 +128,21 @@ namespace OneDPrep
             this.label1.TabIndex = 4;
             this.label1.Text = "Погладь песика:";
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(1090, 0);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(178, 654);
+            this.listBox1.TabIndex = 5;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1111, 665);
+            this.ClientSize = new System.Drawing.Size(1269, 665);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.scatter);
             this.Controls.Add(this.plotSignal);
@@ -158,6 +168,7 @@ namespace OneDPrep
         private AI.Charts.Control.ChartVisual plotSignal;
         private AI.Charts.Control.ChartVisual scatter;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

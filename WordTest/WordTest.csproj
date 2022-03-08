@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{763CC551-6FDA-4796-8EF4-F630BEA8F14C}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AIDog.DataPrep</RootNamespace>
-    <AssemblyName>AIDog.DataPrep</AssemblyName>
+    <ProjectGuid>{6B4F3AF9-364A-4957-886A-5F0E218A5420}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>WordTest</RootNamespace>
+    <AssemblyName>WordTest</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,32 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\Lateral.cs" />
-    <Compile Include="Base\Seq1D\AGC.cs" />
-    <Compile Include="Base\Seq1D\AGCVectorAction.cs" />
-    <Compile Include="Base\Seq1D\LinearPrediction.cs" />
-    <Compile Include="filters.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>filters.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WordGeneration\WordFromVectors.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="filters.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>filters.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\filter" />
-    <None Include="Resources\filter_mean_std" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\AIFrameworkOpen\AI\AI.csproj">
+    <ProjectReference Include="..\..\AIFrameworkOpen\AI\AI.csproj">
       <Project>{5bb9b8ac-9906-4fd7-a8e6-5eb202fb57a1}</Project>
       <Name>AI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\AIDog.DataPrep\AIDog.DataPrep.csproj">
+      <Project>{763cc551-6fda-4796-8ef4-f630bea8f14c}</Project>
+      <Name>AIDog.DataPrep</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
