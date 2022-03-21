@@ -1,6 +1,7 @@
 ﻿using AI.DataStructs.Algebraic;
 using AI.Extensions;
 using AI.ML.Clustering;
+using AIDog.DataPrep;
 using AIDog.DataPrep.Base;
 using AIDog.DataPrep.Base.Seq1D;
 using AIDog.DataPrep.WordGeneration;
@@ -17,19 +18,13 @@ namespace OneDPrep
         public Form1()
         {
             InitializeComponent();
-            ava.Update += Ava_Update;
+            signal2Word.UpdateContrastSignal += Ava_Update;
+            signal2Word.UpdateWord += Signal2Word_UpdateWord;
         }
 
-        
-
-        AGCVectorAction ava = new AGCVectorAction(3);
-        WordFromVectors wfv;
-        bool isInitW = false;
+        Signal2Word signal2Word = new Signal2Word(3, 5);
         private readonly List<Vector> Vectors = new List<Vector>();
         private double mX = 0, mY = 0;
-        private int iter = 0;
-        private readonly KMeans clustering = new KMeans(5);
-        private readonly int modeler = 130;
         private readonly Vector c1y1 = new Vector(0);
         private readonly Vector c1y2 = new Vector(0);
         private readonly Vector c2y1 = new Vector(0);
@@ -50,13 +45,12 @@ namespace OneDPrep
         // Тики
         private void fps_Tick(object sender, EventArgs e)
         {
-            ava.PushSignal(new Vector(mX, mY, mX * mX));
+            signal2Word.Push(new Vector(mX, mY, mX * mX));
         }
 
         // Сигнал после прореживания
         private void Ava_Update(Vector vector)
         {
-            vector = Lateral.GetContrast(vector);
             Vectors.Add(vector);
             Vector x = Vector.SeqBeginsWithZero(1, Vectors.Count);
             Classes.BarBlack(vector);
@@ -72,67 +66,58 @@ namespace OneDPrep
             plotSignal.AddPlot(x, y_3, "z");
 
             scatter.Clear();
-            int cl = iter < modeler + 2 ? 3 : clustering.Classify(vector);
-
-            // Условие обучения кластеризатора
-            if (iter++ == modeler)
-            {
-                clustering.Train(vArr, 2);
-            }
-
-            ShowScatter(cl, vector); // Показать скаттерограмму
+            ShowScatter(signal2Word.NumCluster, vector); // Показать скаттерограмму
         }
 
         // ----------------------------------------------------------------------------//
         // Показать скаттерограмму
         private void ShowScatter(int cl, Vector vector)
         {
-            if (iter > modeler)
+
+            if (cl == 0)
             {
-                if (!isInitW) 
-                {
-                    wfv = new WordFromVectors(clustering.Сentroids);
-                    isInitW = true;
-                }
-
-                listBox1.Items.Add(wfv.GetWord(vector));
-
-
-                if (cl == 0)
-                {
-                    c1y1.Add(vector[0]);
-                    c1y2.Add(vector[1]);
-                }
-                if (cl == 1)
-                {
-                    c2y1.Add(vector[0]);
-                    c2y2.Add(vector[1]);
-                }
-                if (cl == 2)
-                {
-                    c3y1.Add(vector[0]);
-                    c3y2.Add(vector[1]);
-                }
-                if (cl == 3)
-                {
-                    c4y1.Add(vector[0]);
-                    c4y2.Add(vector[1]);
-                }
-                if (cl == 4)
-                {
-                    c5y1.Add(vector[0]);
-                    c5y2.Add(vector[1]);
-                }
-
-                scatter.Clear();
-                scatter.AddScatter(c1y1, c1y2, "distr data_1", Color.Red);
-                scatter.AddScatter(c2y1, c2y2, "distr data_2", Color.Green);
-                scatter.AddScatter(c3y1, c3y2, "distr data_3", Color.Blue);
-                scatter.AddScatter(c4y1, c4y2, "distr data_4", Color.Gray);
-                scatter.AddScatter(c5y1, c5y2, "distr data_5", Color.Black);
+                c1y1.Add(vector[0]);
+                c1y2.Add(vector[1]);
             }
+            if (cl == 1)
+            {
+                c2y1.Add(vector[0]);
+                c2y2.Add(vector[1]);
+            }
+            if (cl == 2)
+            {
+                c3y1.Add(vector[0]);
+                c3y2.Add(vector[1]);
+            }
+            if (cl == 3)
+            {
+                c4y1.Add(vector[0]);
+                c4y2.Add(vector[1]);
+            }
+            if (cl == 4)
+            {
+                c5y1.Add(vector[0]);
+                c5y2.Add(vector[1]);
+            }
+
+            scatter.Clear();
+            scatter.AddScatter(c1y1, c1y2, "distr data_1", Color.Red);
+            scatter.AddScatter(c2y1, c2y2, "distr data_2", Color.Green);
+            scatter.AddScatter(c3y1, c3y2, "distr data_3", Color.Blue);
+            scatter.AddScatter(c4y1, c4y2, "distr data_4", Color.Gray);
+            scatter.AddScatter(c5y1, c5y2, "distr data_5", Color.Black);
+        
+
         }
 
+
+        /// <summary>
+        ///  Появление новых состояний (слов)
+        /// </summary>
+        private void Signal2Word_UpdateWord(string obj)
+        {
+            listBox1.Items.Add(obj);
+        }
 
     }
 }
