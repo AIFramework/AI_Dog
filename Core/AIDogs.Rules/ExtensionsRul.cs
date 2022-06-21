@@ -32,8 +32,9 @@ namespace AIDog.Rules
             }
         }
 
-        public static string ToStringRules(this Rule[] rules) 
+        public static string ToStringRules(this IEnumerable<Rule> rulesIEn) 
         {
+            Rule[] rules = rulesIEn.ToArray();
             StringBuilder stringBuilder = new StringBuilder();
             foreach (Rule item in rules)
             {

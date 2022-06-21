@@ -9,13 +9,13 @@ namespace AIDog.Graphs.BaseGraph
 {
     public class Graph
     {
-        public int NumberOfVertex { get; private set; }
-        public int NumberOfArcs { get; protected set; } = 0;
+        public int NumberOfVertex { get;    private set; }
+        public int NumberOfArcs   { get;    protected set; } = 0;
 
         /// <summary>
         /// Матрица смежности
         /// </summary>
-        Matrix _adjMatrix { get; set; }
+        public Matrix AdjMatrix { get; set; }
 
         /// <summary>
         /// Создание графа
@@ -23,7 +23,7 @@ namespace AIDog.Graphs.BaseGraph
         /// <param name="nV">Число вершин</param>
         public Graph(int nV) 
         {
-            _adjMatrix = new Matrix(nV, nV);
+            AdjMatrix = new Matrix(nV, nV);
             NumberOfVertex = nV;
         }
 
@@ -38,7 +38,7 @@ namespace AIDog.Graphs.BaseGraph
             double old = GetW(v1, v2);
             if (old == 0 && w != 0) NumberOfArcs++;
             if (old != 0 && w == 0) NumberOfArcs--;
-            _adjMatrix[v1, v2] = w;
+            AdjMatrix[v1, v2] = w;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace AIDog.Graphs.BaseGraph
         /// </summary>
         public double GetW(int v1, int v2, bool isNormal = true)
         {
-            return _adjMatrix[v1, v2];
+            return AdjMatrix[v1, v2];
         }
 
         /// <summary>
@@ -220,9 +220,7 @@ namespace AIDog.Graphs.BaseGraph
             {
                 int[] vs = g.Adj(i);
                 for (int j = 0; j < vs.Length; j++)
-                {
                     if (vs[i] == i) count++;
-                }
             }
 
             return count;

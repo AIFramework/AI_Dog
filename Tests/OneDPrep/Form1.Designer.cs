@@ -33,11 +33,12 @@ namespace OneDPrep
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.fps = new System.Windows.Forms.Timer(this.components);
-            this.Classes = new AI.Charts.Control.ChartVisual();
-            this.plotSignal = new AI.Charts.Control.ChartVisual();
-            this.scatter = new AI.Charts.Control.ChartVisual();
             this.label1 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.heatMapControl1 = new AI.Charts.Control.HeatMapControl();
+            this.scatter = new AI.Charts.Control.ChartVisual();
+            this.Classes = new AI.Charts.Control.ChartVisual();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,10 +47,10 @@ namespace OneDPrep
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 27);
+            this.pictureBox1.Location = new System.Drawing.Point(7, 23);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(315, 356);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.Size = new System.Drawing.Size(247, 257);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
@@ -60,50 +61,41 @@ namespace OneDPrep
             this.fps.Interval = 30;
             this.fps.Tick += new System.EventHandler(this.fps_Tick);
             // 
-            // Classes
+            // label1
             // 
-            this.Classes.AutoScroll = true;
-            this.Classes.BackColor = System.Drawing.Color.White;
-            this.Classes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Classes.ChartName = "Активации";
-            this.Classes.ForeColor = System.Drawing.Color.Black;
-            this.Classes.IsContextMenu = true;
-            this.Classes.IsLogScale = false;
-            this.Classes.IsMoove = true;
-            this.Classes.IsScale = true;
-            this.Classes.IsShowXY = true;
-            this.Classes.LabelX = "Компонента";
-            this.Classes.LabelY = "Значение";
-            this.Classes.Location = new System.Drawing.Point(333, 0);
-            this.Classes.Name = "Classes";
-            this.Classes.Size = new System.Drawing.Size(303, 383);
-            this.Classes.TabIndex = 1;
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label1.ForeColor = System.Drawing.Color.Blue;
+            this.label1.Location = new System.Drawing.Point(0, 2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(112, 17);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Погладь песика";
             // 
-            // plotSignal
+            // label2
             // 
-            this.plotSignal.AutoScroll = true;
-            this.plotSignal.BackColor = System.Drawing.Color.White;
-            this.plotSignal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.plotSignal.ChartName = "S(t)";
-            this.plotSignal.ForeColor = System.Drawing.Color.Black;
-            this.plotSignal.IsContextMenu = true;
-            this.plotSignal.IsLogScale = false;
-            this.plotSignal.IsMoove = true;
-            this.plotSignal.IsScale = true;
-            this.plotSignal.IsShowXY = true;
-            this.plotSignal.LabelX = "Время(отсчеты)";
-            this.plotSignal.LabelY = "Значение сигнала";
-            this.plotSignal.Location = new System.Drawing.Point(12, 390);
-            this.plotSignal.Name = "plotSignal";
-            this.plotSignal.Size = new System.Drawing.Size(1072, 267);
-            this.plotSignal.TabIndex = 2;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(390, 285);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(147, 20);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Языковая модель";
+            // 
+            // heatMapControl1
+            // 
+            this.heatMapControl1.Location = new System.Drawing.Point(310, 286);
+            this.heatMapControl1.Name = "heatMapControl1";
+            this.heatMapControl1.Size = new System.Drawing.Size(382, 285);
+            this.heatMapControl1.TabIndex = 6;
             // 
             // scatter
             // 
             this.scatter.AutoScroll = true;
             this.scatter.BackColor = System.Drawing.Color.White;
             this.scatter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.scatter.ChartName = "Распределение";
+            this.scatter.ChartName = "Семантический образ";
             this.scatter.ForeColor = System.Drawing.Color.Black;
             this.scatter.IsContextMenu = true;
             this.scatter.IsLogScale = false;
@@ -112,40 +104,50 @@ namespace OneDPrep
             this.scatter.IsShowXY = true;
             this.scatter.LabelX = "x";
             this.scatter.LabelY = "y";
-            this.scatter.Location = new System.Drawing.Point(642, 0);
+            this.scatter.Location = new System.Drawing.Point(5, 286);
             this.scatter.Name = "scatter";
-            this.scatter.Size = new System.Drawing.Size(442, 383);
+            this.scatter.Size = new System.Drawing.Size(299, 285);
             this.scatter.TabIndex = 3;
             // 
-            // label1
+            // Classes
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold);
-            this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(8, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(195, 26);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Погладь песика:";
+            this.Classes.AutoScroll = true;
+            this.Classes.BackColor = System.Drawing.Color.White;
+            this.Classes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Classes.ChartName = "Сенсорный образ";
+            this.Classes.ForeColor = System.Drawing.Color.Black;
+            this.Classes.IsContextMenu = true;
+            this.Classes.IsLogScale = false;
+            this.Classes.IsMoove = true;
+            this.Classes.IsScale = true;
+            this.Classes.IsShowXY = true;
+            this.Classes.LabelX = "Компонента";
+            this.Classes.LabelY = "Значение";
+            this.Classes.Location = new System.Drawing.Point(260, 23);
+            this.Classes.Name = "Classes";
+            this.Classes.Size = new System.Drawing.Size(435, 257);
+            this.Classes.TabIndex = 1;
             // 
-            // listBox1
+            // label3
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(1090, 0);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(178, 654);
-            this.listBox1.TabIndex = 5;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 587);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "label3";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1269, 665);
-            this.Controls.Add(this.listBox1);
+            this.ClientSize = new System.Drawing.Size(694, 612);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.heatMapControl1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.scatter);
-            this.Controls.Add(this.plotSignal);
             this.Controls.Add(this.Classes);
             this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -153,7 +155,7 @@ namespace OneDPrep
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
-            this.Text = "VectorTest";
+            this.Text = "AI Dog Main test";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -165,10 +167,11 @@ namespace OneDPrep
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer fps;
         private AI.Charts.Control.ChartVisual Classes;
-        private AI.Charts.Control.ChartVisual plotSignal;
-        private AI.Charts.Control.ChartVisual scatter;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox listBox1;
+        private AI.Charts.Control.HeatMapControl heatMapControl1;
+        private AI.Charts.Control.ChartVisual scatter;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

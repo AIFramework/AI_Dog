@@ -53,11 +53,20 @@ namespace AIDog.DataPrep.WordGeneration
         }
 
         /// <summary>
+        /// Получение вектора образа
+        /// </summary>
+        /// <param name="inp">Вход</param>
+        public Vector SemanticVector(Vector inp) 
+        {
+            return inp * TransformMatr;
+        }
+
+        /// <summary>
         /// Получение слова из вектора
         /// </summary>
         public string GetWord(Vector vect) 
         {
-            Vector trv = vect * TransformMatr;
+            Vector trv = SemanticVector(vect);
             StringBuilder @string = new StringBuilder();
             foreach (var item in trv)
             {

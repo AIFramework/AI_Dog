@@ -25,11 +25,16 @@ namespace AIDog.DataPrep
         /// <summary>
         /// Число векторов для первоначального моделирования
         /// </summary>
-        public int NModeler { get; set; } = 130;
+        public int NModeler { get; set; } = 200;
         /// <summary>
         /// Текущий кластер
         /// </summary>
         public int NumCluster { get; protected set; } = -1;
+
+        /// <summary>
+        /// Вектор образа
+        /// </summary>
+        public Vector SemanticVector { get; protected set; } = new Vector();
 
 
         AGCVectorAction ava;
@@ -37,6 +42,7 @@ namespace AIDog.DataPrep
         bool _isInitW = false;
         int _iter = 0; // номер итерации
         string _oldWord;
+        long _updCounter = 0; // Счетчик для обновлений
 
         /// <summary>
         /// Перевод сигналов в слова
@@ -45,6 +51,7 @@ namespace AIDog.DataPrep
         {
             ava = new AGCVectorAction(dimInp);
             Clustering = new KMeans(pow2NWord);
+            SemanticVector = new Vector(pow2NWord);
 
             ava.Update += Ava_Update;
             UpdateSignal += Signal2Word_UpdateSignal;
@@ -75,29 +82,38 @@ namespace AIDog.DataPrep
 
             // Условие обучения кластеризатора
             if (_iter++ == NModeler) Clustering.Train(Vectors.ToArray());
-            else Vectors.Add(vector);
             
-            if (_iter > NModeler)
+            else if (_iter > NModeler)
             {
+                //Доучивание
+                Clustering.OnlineTuning(vector, 0.001);
                 // Обучение
-                Teach(); 
+                InitTransformMatrix(); 
                 string newWord = wfv.GetWord(vector);
                 if (newWord != _oldWord) UpdateWord(newWord); // Обновление слов
                 _oldWord = newWord;
                 // Выдача кластера
                 NumCluster = Clustering.Classify(vector);
+                SemanticVector = wfv.SemanticVector(vector);
                 GetCluster(NumCluster);
             }
+
+            else Vectors.Add(vector);
 
         }
 
         // Обучение
-        private void Teach() 
+        private void InitTransformMatrix(int updPeriod = 10) 
         {
+            _updCounter++;
             if (!_isInitW)
             {
                 wfv = new WordFromVectors(Clustering.Сentroids);
                 _isInitW = true;
+            }
+            else if(_updCounter%updPeriod == 0) 
+            {
+                wfv = new WordFromVectors(Clustering.Сentroids);
             }
 
             IsMatrixInit(_isInitW);

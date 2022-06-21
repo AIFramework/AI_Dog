@@ -14,12 +14,16 @@ namespace AIDog.Rules.GraphRules
     {
         public GraphWithVertex MainGraph { get; protected set; }
 
+
+
         /// <summary>
         /// Простая логика на графах
         /// </summary>
         public GRBase(IEnumerable<Rule> rules)
         {
-            var rulArray = rules.ToArray();
+            var rulArray = ReCulcRules(rules.ToArray());
+            rulArray.EvalutionApriori();
+
             HashSet<string> names = new HashSet<string>();
 
             // Создание набора переменных
@@ -31,10 +35,7 @@ namespace AIDog.Rules.GraphRules
 
             List<Vertex> vertices = new List<Vertex>(names.Count);
 
-            foreach (var item in names)
-            {
-                vertices.Add(new Vertex(item));
-            }
+            foreach (var item in names) vertices.Add(new Vertex(item));
 
             MainGraph = new GraphWithVertex(vertices); // Создание пустого графа
             Vertex[] verticesArray = vertices.ToArray();
@@ -54,6 +55,28 @@ namespace AIDog.Rules.GraphRules
         {
             var data = MainGraph.Vertices;
             return Vertex.FromName(data, name);
+        }
+
+        public Rule[] ReCulcRules(Rule[] rules) 
+        {
+            List<Rule> result = new List<Rule>();
+
+            for (int i = 0; i < rules.Length; i++)
+            {
+                int j = Find(result, rules[i]);
+                if (j != -1) result[j].CountActiv++;
+                else result.Add(rules[i]);
+            }
+
+            return result.ToArray();
+        }
+
+        private int Find(List<Rule> result, Rule rule) 
+        {
+            for (int i = 0; i < result.Count; i++)
+                if(result[i].IF == rule.IF&& result[i].THEN == rule.THEN) return i;
+            
+            return -1;
         }
     }
 }
