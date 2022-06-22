@@ -1,6 +1,7 @@
 ﻿using AI.DataStructs.Algebraic;
 using AI.Extensions;
 using AI.ML.Clustering;
+using AI.ML.DataEncoding.PositionalEncoding;
 using AIDog.DataPrep;
 using AIDog.DataPrep.Base;
 using AIDog.DataPrep.Base.Seq1D;
@@ -28,10 +29,15 @@ namespace OneDPrep
         List<Rule> rules = new List<Rule>();
         GRBase logic;
 
-        Signal2Word signal2Word = new Signal2Word(50, 5);
+        double True = 0, All = 0; // Для оценки качества языковой модели
+        private double[] err = new double[100];
+
+        Signal2Word signal2Word = new Signal2Word(64+50, 5);
         private readonly List<Vector> Vectors = new List<Vector>();
         private double mX = 0, mY = 0;
-    
+        IPositionEncoding timeEnc = new PositionEncoderOnDeductionRings(64);
+        int t = 0, ct= 0; // Восприятие времени
+
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -49,7 +55,9 @@ namespace OneDPrep
             Vector inpX = Vector.OneHotPol(X, regions-1);
             Vector inpY = Vector.OneHotPol(Y, regions-1);
 
-            signal2Word.Push(Vector.Concat(new[] { inpY, inpX} ));
+            signal2Word.Push(Vector.Concat(new[] { inpY, inpX, timeEnc.GetCode(t)} ));
+            if(ct%1==0) t++;
+            ct++;
         }
 
         // Сигнал после прореживания
@@ -75,6 +83,21 @@ namespace OneDPrep
                 rules.Add(new Rule(oldState, obj));
                 logic = new GRBase(rules);
                 heatMapControl1.CalculateHeatMap(logic.MainGraph.MainGraph.AdjMatrix);
+                var dat = logic.MainGraph.GetVertexForKStep(oldState, 1);
+                var indexVert = dat.Item2.MaxElementIndex();
+
+                err[(int)All] = 1.0 - dat.Item2[indexVert];
+
+                if (dat.Item1[indexVert] == obj) True++;
+                All++;
+
+
+                if (All == 100)
+                {
+                    label3.Text = $"Точность: {Math.Round(True / All, 3)}\t Ошибка {Math.Round(err.Mean(), 3)}";
+                    All = 0;
+                    True = 0;
+                }
             }
             oldState = obj;
         }
