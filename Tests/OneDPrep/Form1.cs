@@ -32,10 +32,10 @@ namespace OneDPrep
         double True = 0, All = 0; // Для оценки качества языковой модели
         private double[] err = new double[100];
 
-        Signal2Word signal2Word = new Signal2Word(64+50, 5);
+        Signal2Word signal2Word = new Signal2Word(512+50, 8);
         private readonly List<Vector> Vectors = new List<Vector>();
         private double mX = 0, mY = 0;
-        IPositionEncoding timeEnc = new PositionEncoderOnDeductionRings(64);
+        IPositionEncoding timeEnc = new MultiscaleEncoder(512);
         int t = 0, ct= 0; // Восприятие времени
 
 
