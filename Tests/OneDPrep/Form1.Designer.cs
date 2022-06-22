@@ -39,6 +39,7 @@ namespace OneDPrep
             this.scatter = new AI.Charts.Control.ChartVisual();
             this.Classes = new AI.Charts.Control.ChartVisual();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -138,12 +139,23 @@ namespace OneDPrep
             this.label3.TabIndex = 8;
             this.label3.Text = "Точность: ";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(211, 629);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(93, 29);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Слово:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(694, 612);
+            this.ClientSize = new System.Drawing.Size(694, 667);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.heatMapControl1);
@@ -173,6 +185,7 @@ namespace OneDPrep
         private AI.Charts.Control.ChartVisual scatter;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

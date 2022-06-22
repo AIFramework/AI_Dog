@@ -32,10 +32,10 @@ namespace OneDPrep
         double True = 0, All = 0; // Для оценки качества языковой модели
         private double[] err = new double[100];
 
-        Signal2Word signal2Word = new Signal2Word(512+50, 8);
+        Signal2Word signal2Word = new Signal2Word(256+50, 8);
         private readonly List<Vector> Vectors = new List<Vector>();
         private double mX = 0, mY = 0;
-        IPositionEncoding timeEnc = new MultiscaleEncoder(512);
+        IPositionEncoding timeEnc = new MultiscaleEncoder(256);
         int t = 0, ct= 0; // Восприятие времени
 
 
@@ -56,7 +56,7 @@ namespace OneDPrep
             Vector inpY = Vector.OneHotPol(Y, regions-1);
 
             signal2Word.Push(Vector.Concat(new[] { inpY, inpX, timeEnc.GetCode(t)} ));
-            if(ct%1==0) t++;
+            if(ct%10==0) t++;
             ct++;
         }
 
@@ -100,6 +100,7 @@ namespace OneDPrep
                 }
             }
             oldState = obj;
+            label4.Text = $"Слово: {obj}";
         }
 
     }
