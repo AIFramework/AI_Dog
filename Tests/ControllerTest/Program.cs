@@ -19,7 +19,7 @@ namespace ControllerTest
     {
         static void Main(string[] args)
         {
-            string[] texts = File.ReadAllLines("dataset.txt");
+            string[] texts = File.ReadAllLines("dataset1.txt");
             List<string> data = new List<string>();
 
             for (int i = 0; i < texts.Length; i++)
@@ -77,8 +77,8 @@ namespace ControllerTest
         }
         static void Train(NeuralNetworkManager nnw, Many2Many dataset, int count)
         {
-            nnw.EpochesToPass = 20;
-            nnw.LearningRate = 0.0003f;
+            nnw.EpochesToPass = 15;
+            nnw.LearningRate = 0.001f;
             nnw.GradientClipValue = 0.2f;
             nnw.ValSplit = 0;
             nnw.Loss = new CrossEntropyWithSoftmax();
@@ -113,10 +113,12 @@ namespace ControllerTest
             string[] trainData = PrepareTexts(texts);//data.ToArray());
             char[] chars = GetChars(trainData);
             Many2Many dataset = DataSetEmb(trainData, chars);
-            NNW lstm = GetNNWEmb(chars.Length);
-            //NNW lstm = NNW.Load("pretrain1.net");//
+            //NNW lstm = GetNNWEmb(chars.Length);
+            NNW lstm = NNW.Load("pretrain1.net");//
             NeuralNetworkManager neuralNetwork = new NeuralNetworkManager(lstm);
             Train(neuralNetwork, dataset, chars.Length);
+
+            lstm.Save("pretrain1.net");
             while (true)
             {
                 Console.WriteLine("\nВведите фразу: ");
@@ -155,8 +157,9 @@ namespace ControllerTest
         static NNW GetNNWEmb(int inps)
         {
             NNW lstm = new NNW();
-            lstm.AddNewLayer(new Shape3D(1), new EmbedingLayer(inps, 32));
-            lstm.AddNewLayer(new ControllerL(50));
+            lstm.AddNewLayer(new Shape3D(1), new EmbedingLayer(inps, 100));
+            lstm.AddNewLayer(new ControllerLResNet(100));
+            lstm.AddNewLayer(new ControllerLResNet(100));
             lstm.AddNewLayer(new FeedForwardLayer(inps, new SoftmaxUnit()));
             return lstm;
         }
