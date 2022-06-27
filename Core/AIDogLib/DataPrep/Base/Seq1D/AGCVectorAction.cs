@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace AIDog.DataPrep.Base.Seq1D
 {
+    [Serializable]
     public class AGCVectorAction
     {
         public AGC[] Agc { get; set; }

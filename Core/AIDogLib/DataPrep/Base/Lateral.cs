@@ -11,6 +11,7 @@ namespace AIDog.DataPrep.Base
     /// <summary>
     /// Аналог латерального торможения в мозге
     /// </summary>
+    [Serializable]
     public class Lateral
     {
         /// <summary>

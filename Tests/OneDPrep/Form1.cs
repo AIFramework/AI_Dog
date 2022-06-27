@@ -8,6 +8,7 @@ using AIDog.DataPrep.Base.Seq1D;
 using AIDog.DataPrep.WordGeneration;
 using AIDog.Rules;
 using AIDog.Rules.GraphRules;
+using AIDog.Tools;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -32,7 +33,7 @@ namespace OneDPrep
         double True = 0, All = 0; // Для оценки качества языковой модели
         private double[] err = new double[100];
 
-        Signal2Word signal2Word = new Signal2Word(256+50, 8);
+        Signal2Word signal2Word = new Signal2Word(256+50, 5);
         private readonly List<Vector> Vectors = new List<Vector>();
         private double mX = 0, mY = 0;
         IPositionEncoding timeEnc = new MultiscaleEncoder(256);
@@ -100,7 +101,7 @@ namespace OneDPrep
                 }
             }
             oldState = obj;
-            label4.Text = $"Слово: {obj}";
+            label4.Text = $"Слово: {obj} ({obj.BinaryToDecimal()})";
         }
 
     }

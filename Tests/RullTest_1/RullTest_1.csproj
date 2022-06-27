@@ -54,13 +54,9 @@
       <Project>{5bb9b8ac-9906-4fd7-a8e6-5eb202fb57a1}</Project>
       <Name>AI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\AIDog.Graphs\AIDog.Graphs.csproj">
-      <Project>{090DB41A-EFC8-4B02-B6EC-68511BF9EEB8}</Project>
-      <Name>AIDog.Graphs</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core\AIDogs.Rules\AIDog.Rules.csproj">
-      <Project>{52615efe-c6e7-49af-9f82-94ce5d18b4c4}</Project>
-      <Name>AIDog.Rules</Name>
+    <ProjectReference Include="..\..\Core\AIDogLib\AIDogLib.csproj">
+      <Project>{022bb645-369e-4614-b26d-1340a1ff50f3}</Project>
+      <Name>AIDogLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

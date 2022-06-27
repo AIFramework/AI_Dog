@@ -10,6 +10,7 @@ namespace AIDog.Graphs.BaseGraph
     /// <summary>
     /// Вершина
     /// </summary>
+    [Serializable]
     public class Vertex
     {
         public Vector VertexVector { get; set; }

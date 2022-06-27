@@ -27,7 +27,7 @@ namespace RullTest_1
                 new Rule("повышенная температура", "травма"),
                 new Rule("головная боль", "простуда"){ CountActiv = 2},
                 new Rule("головная боль", "травма"),
-                new Rule("головная боль", "мигрень"),
+                new Rule("головная боль", "мигрень"){ CountActiv = 3},
                 new Rule("головная боль", "грипп"),
                 new Rule("сломана рука", "травма"){ CountActiv = 3},
                 new Rule("простуда", "сидеть дома"),
@@ -48,7 +48,7 @@ namespace RullTest_1
                 Console.WriteLine();
                 try
                 {
-                    Tuple<string[], AI.DataStructs.Algebraic.Vector> dat = logic.MainGraph.GetVertexForKStep(inp);
+                    Tuple<string[], AI.DataStructs.Algebraic.Vector> dat = logic.MainGraph.GetVertexForKStep(inp,2);
                     string[] n = dat.Item1;
                     AI.DataStructs.Algebraic.Vector v = dat.Item2;
 

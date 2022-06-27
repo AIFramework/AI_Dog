@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AIDog.DataPrep.WordGeneration
-{   
+{
     /// <summary>
     /// Формирование слов из векторов 
     /// </summary>
+    [Serializable]
     public class WordFromVectors
     {
         /// <summary>

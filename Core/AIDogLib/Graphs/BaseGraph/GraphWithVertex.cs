@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace AIDog.Graphs.BaseGraph
 {
+    [Serializable]
     public class GraphWithVertex
     {
         /// <summary>

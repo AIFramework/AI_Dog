@@ -4,6 +4,7 @@ using System;
 
 namespace AIDog.DataPrep.Base.Seq1D
 {
+    [Serializable]
     public class AGC
     {
         public IIRFilter IIRFilterMean { get; private set; }

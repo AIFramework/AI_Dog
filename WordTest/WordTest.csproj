@@ -54,9 +54,9 @@
       <Project>{5bb9b8ac-9906-4fd7-a8e6-5eb202fb57a1}</Project>
       <Name>AI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\AIDog.DataPrep\AIDog.DataPrep.csproj">
-      <Project>{763cc551-6fda-4796-8ef4-f630bea8f14c}</Project>
-      <Name>AIDog.DataPrep</Name>
+    <ProjectReference Include="..\Core\AIDogLib\AIDogLib.csproj">
+      <Project>{022bb645-369e-4614-b26d-1340a1ff50f3}</Project>
+      <Name>AIDogLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

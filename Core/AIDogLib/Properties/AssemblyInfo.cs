@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные со сборкой.
-[assembly: AssemblyTitle("AIDog.DataPrep")]
+[assembly: AssemblyTitle("AIDogLib")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AIDog.DataPrep")]
+[assembly: AssemblyProduct("AIDogLib")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("763cc551-6fda-4796-8ef4-f630bea8f14c")]
+[assembly: Guid("022bb645-369e-4614-b26d-1340a1ff50f3")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //

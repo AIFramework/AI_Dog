@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{090DB41A-EFC8-4B02-B6EC-68511BF9EEB8}</ProjectGuid>
+    <ProjectGuid>{022BB645-369E-4614-B26D-1340A1FF50F3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AIDog.Graphs</RootNamespace>
-    <AssemblyName>AIDog.Graphs</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <RootNamespace>AIDog</RootNamespace>
+    <AssemblyName>AIDogLib</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -29,6 +29,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\AIDogLib.xml</DocumentationFile>
+    <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -41,10 +43,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseGraph\Graph.cs" />
-    <Compile Include="BaseGraph\GraphWithVertex.cs" />
-    <Compile Include="BaseGraph\Vertex.cs" />
+    <Compile Include="DataPrep\Base\Lateral.cs" />
+    <Compile Include="DataPrep\Base\Seq1D\AGC.cs" />
+    <Compile Include="DataPrep\Base\Seq1D\AGCVectorAction.cs" />
+    <Compile Include="DataPrep\Base\Seq1D\LinearPrediction.cs" />
+    <Compile Include="DataPrep\filters.Designer.cs" />
+    <Compile Include="DataPrep\Signal2Word.cs" />
+    <Compile Include="DataPrep\WordGeneration\WordFromVectors.cs" />
+    <Compile Include="Emotions\DataEmotions.cs" />
+    <Compile Include="Graphs\BaseGraph\Graph.cs" />
+    <Compile Include="Graphs\BaseGraph\GraphWithVertex.cs" />
+    <Compile Include="Graphs\BaseGraph\Vertex.cs" />
+    <Compile Include="Memory\AssociativSimpleMemory.cs" />
+    <Compile Include="Memory\SensorAndSemanticMemory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules\ExtensionsRul.cs" />
+    <Compile Include="Rules\GraphRules\GRBase.cs" />
+    <Compile Include="Rules\Rule.cs" />
+    <Compile Include="Rules\SimpleCalc.cs" />
+    <Compile Include="Tools\NumConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DataPrep\filters.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataPrep\Resources\filter" />
+    <None Include="DataPrep\Resources\filter_mean_std" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AIFrameworkOpen\AI\AI.csproj">
@@ -52,5 +76,6 @@
       <Name>AI</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
