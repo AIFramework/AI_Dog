@@ -1,6 +1,6 @@
-AI Dog Copyright (C) (2022) Zahar A. Ponimash ("Licensor")
+## AI Dog Copyright (C) (2022) Zahar A. Ponimash ("Licensor")
 
-Hippocratic License Version Number: 2.1.
+## Hippocratic License Version Number: 2.1.
 
 Purpose. The purpose of this License is for the Licensor named above to permit the Licensee (as defined below) broad permission, if consistent with Human Rights Laws
 
