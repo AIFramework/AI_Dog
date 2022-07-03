@@ -19,6 +19,8 @@ namespace AIDog.Graphs.BaseGraph
         /// </summary>
         public Vertex[] Vertices { get; protected set; }
 
+        long _countUpdate = 0;
+
         /// <summary>
         /// Граф со связями с вершинами
         /// </summary>
@@ -29,6 +31,21 @@ namespace AIDog.Graphs.BaseGraph
             MainGraph = graph;
             Vertices = vertices.ToArray();
         }
+
+        /// <summary>
+        /// Создание графа с пустыми вершинами
+        /// </summary>
+        /// <param name="numVertex">Число вершин</param>
+        public GraphWithVertex(int numVertex)
+        {
+            MainGraph = new Graph(numVertex);
+            Vertices = new Vertex[numVertex];
+
+            for (int i = 0; i < Vertices.Length; i++) 
+                Vertices[i] = new Vertex(String.Empty);
+        }
+
+    
 
         /// <summary>
         /// Граф без связей с вершинами
@@ -79,21 +96,25 @@ namespace AIDog.Graphs.BaseGraph
         /// Получение лапласиана для вершины
         /// </summary>
         /// <param name="vertex">Опорная вершина</param>
-        public Vector GetLaplasian(Vertex vertex) 
+        public Vector[] GetLaplasian(Vertex vertex) 
         {
             int ind = GetVertexIndex(vertex);
-            if (ind == -1)
-                return vertex.VertexVector;
-    
-            Vector laplassian = vertex.VertexVector;
-            int[] inds = MainGraph.Adj(ind);
+            if (ind == -1) return vertex.VertexVector;
 
-            for (int i = 0; i < inds.Length; i++)
+            int[] inds = MainGraph.Adj(ind);
+            Vector[] laplassian = new Vector[vertex.VertexVector.Length];
+
+            for (int n = 0; n < laplassian.Length; n++)
             {
-                laplassian = MainGraph.GetW(ind, inds[i]) * Vertices[inds[i]].VertexVector;
+                laplassian[n] = vertex.VertexVector[n].Clone(); // Выбор вектора вершины
+
+                for (int i = 0; i < inds.Length; i++)
+                    laplassian[n] += MainGraph.GetW(ind, inds[i]) * Vertices[inds[i]].VertexVector[n]; // Вычисление Лаплассина
+                
+                laplassian[n] /= (inds.Length + 1); // Нормировка
             }
 
-            return laplassian / (inds.Length + 1);
+            return laplassian; 
             
         }
 
@@ -204,6 +225,33 @@ namespace AIDog.Graphs.BaseGraph
                 names[i] = vertices[i].Name;
 
             return names;
+        }
+
+        /// <summary>
+        /// Обновление информации в графе
+        /// </summary>
+        /// <param name="i">Индекс вершины истока</param>
+        /// <param name="j">Индекс вершины стока</param>
+        /// <param name="name_i">Новое имя вершины истока</param>
+        /// <param name="name_j">Новое имя вершины стока</param>
+        /// <param name="value_upd">Новый вес связи</param>
+        public void Update(int i, int j, string name_i, string name_j, double value_upd) 
+        {
+            if (Vertices[i].Name != name_i) Vertices[i].Name = name_i;
+            if (Vertices[j].Name != name_j) Vertices[j].Name = name_j;
+
+            MainGraph.AdjMatrix[i, j] = value_upd;
+        }
+
+        /// <summary>
+        /// Получение связи
+        /// </summary>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
+        /// <returns></returns>
+        public double GetW(int i, int j)
+        {
+            return MainGraph.GetW(i, j);
         }
     }
 }

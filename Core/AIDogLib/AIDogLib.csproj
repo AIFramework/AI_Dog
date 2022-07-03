@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blocks\LogicBlock.cs" />
     <Compile Include="DataPrep\Base\Lateral.cs" />
     <Compile Include="DataPrep\Base\Seq1D\AGC.cs" />
     <Compile Include="DataPrep\Base\Seq1D\AGCVectorAction.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Graphs\BaseGraph\Vertex.cs" />
     <Compile Include="Memory\AssociativSimpleMemory.cs" />
     <Compile Include="Memory\SensorAndSemanticMemory.cs" />
+    <Compile Include="ML\NNW\SimpleAssociativNet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\ExtensionsRul.cs" />
     <Compile Include="Rules\GraphRules\GRBase.cs" />

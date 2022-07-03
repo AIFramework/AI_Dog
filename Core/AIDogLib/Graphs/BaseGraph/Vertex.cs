@@ -13,19 +13,19 @@ namespace AIDog.Graphs.BaseGraph
     [Serializable]
     public class Vertex
     {
-        public Vector VertexVector { get; set; }
+        public Vector[] VertexVector { get; set; }
         public string Name { get; set; }
 
         public Vertex(string name, Vector vector)
         {
             Name = name;
-            VertexVector = vector;
+            VertexVector = new[]{ vector};
         }
 
         public Vertex(string name)
         {
             Name = name;
-            VertexVector = new Vector();
+            VertexVector = new Vector[0];
         }
 
         /// <summary>

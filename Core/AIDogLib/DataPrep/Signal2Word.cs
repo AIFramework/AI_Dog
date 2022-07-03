@@ -86,7 +86,7 @@ namespace AIDog.DataPrep
             else if (_iter > NModeler)
             {
                 //Доучивание
-                Clustering.OnlineTuning(vector, 0.01);
+                Clustering.OnlineTuning(vector, 0.001);
                 // Обучение
                 InitTransformMatrix(); 
                 string newWord = wfv.GetWord(vector);

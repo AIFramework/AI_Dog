@@ -14,7 +14,34 @@ namespace AIDog.Rules.GraphRules
     {
         public GraphWithVertex MainGraph { get; protected set; }
 
+        public GRBase(int numVert)
+        {
+            MainGraph = new GraphWithVertex(numVert);
+        }
 
+        /// <summary>
+        /// Обновление информации в графе
+        /// </summary>
+        /// <param name="i">Индекс вершины истока</param>
+        /// <param name="j">Индекс вершины стока</param>
+        /// <param name="name_i">Новое имя вершины истока</param>
+        /// <param name="name_j">Новое имя вершины стока</param>
+        /// <param name="value_upd">Новый вес связи</param>
+        public void Update(int i, int j, string name_i, string name_j, double value_upd) 
+        {
+            MainGraph.Update(i, j, name_i, name_j, value_upd);
+        }
+
+        /// <summary>
+        /// Получение связи
+        /// </summary>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
+        /// <returns></returns>
+        public double GetW(int i, int j)
+        {
+            return MainGraph.GetW(i, j);
+        }
 
         /// <summary>
         /// Простая логика на графах
