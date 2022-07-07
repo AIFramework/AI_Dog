@@ -55,11 +55,11 @@ namespace OneDPrep
         /// <summary>
         ///  Появление новых состояний (слов)
         /// </summary>
-        private void Signal2Word_UpdateWord(string obj)
+        private void Signal2Word_UpdateWord(int obj)
         {
 
             label3.Text = $"Точность: {logic.Acc}\t Ошибка {logic.Eror}";
-            label4.Text = $"Слово: {obj} ({obj.GrayDecoder()})";
+            label4.Text = $"Слово: {obj}";
             try
             {
                 heatMapControl1.CalculateHeatMap(logic.LogicGraph.MainGraph.MainGraph.AdjMatrix);

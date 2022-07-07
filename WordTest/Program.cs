@@ -1,5 +1,6 @@
 ﻿using AI.DataStructs.Algebraic;
 using AIDog.DataPrep.WordGeneration;
+using AIDog.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,21 @@ namespace WordTest
          
         static void Main(string[] args)
         {
-            Vector[] vectors = new Vector[2];
-            vectors[0] = new Vector(-1, 1, -8);
-            vectors[1] = new Vector(1, -1, 2);
+            Vector v = new Vector(-1, 1, -8);
+            int a = 4;
 
-            WordFromVectors wfv = new WordFromVectors(vectors);
 
-            Console.WriteLine(wfv.GetWord(new Vector(2, -4, 2)));
+            var cor = Simillary.CorrelationVectorInt(v, a);
+            var p = Simillary.FuzzyMembership(v, a);
+
+
+            
+
+            string gr = a.DecimalToGrayStr();
+            Console.WriteLine(gr);
+            Console.WriteLine(gr.GrayDecoder());
+            
+
         }
     }
 }

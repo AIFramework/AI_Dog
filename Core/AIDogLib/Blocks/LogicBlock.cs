@@ -28,7 +28,7 @@ namespace AIDog.Blocks
         /// <summary>
         /// Текущее слово (бинарный код)
         /// </summary>
-        public string CurrentWord => oldState;
+        public string CurrentWord => oldState.ToString();
         /// <summary>
         /// Текущая вершина
         /// </summary>
@@ -49,7 +49,7 @@ namespace AIDog.Blocks
 
         private double[] _err = new double[100];
         private double True = 0, All = 0; // Для оценки качества языковой модели
-        private string oldState = "";
+        private int oldState = -1;
         private long activCount = 0;
        // public double alpha = 0.03;
 
@@ -79,18 +79,18 @@ namespace AIDog.Blocks
         /// <summary>
         ///  Появление новых состояний (слов)
         /// </summary>
-        private void Signal2Word_UpdateWord(string obj)
+        private void Signal2Word_UpdateWord(int obj)
         {
-            if (oldState != "")
+            if (oldState != -1)
             {
                 Activate(oldState, obj);
 
-                var dat = LogicGraph.MainGraph.GetVertexForKStep(oldState, 1);
+                var dat = LogicGraph.MainGraph.GetVertexForKStep(oldState.ToString(), 1);
                 var indexVert = dat.Item2.MaxElementIndex();
 
                 _err[(int)All] = 1.0 - dat.Item2[indexVert];
 
-                if (dat.Item1[indexVert] == obj) True++;
+                if (dat.Item1[indexVert] == obj.ToString()) True++;
                 All++;
 
 
@@ -103,7 +103,7 @@ namespace AIDog.Blocks
                 }
             }
             oldState = obj;
-            CurrentVertexNum = obj.GrayDecoder();
+            CurrentVertexNum = obj;
         }
 
 
@@ -112,17 +112,12 @@ namespace AIDog.Blocks
         /// </summary>
         /// <param name="ifBin"></param>
         /// <param name="elseBin"></param>
-        private void Activate(string ifBin, string elseBin) 
+        private void Activate(int ifBin, int elseBin) 
         {
-            int i = ifBin.GrayDecoder();
-            int j = elseBin.GrayDecoder();
-            
             LogicGraph.MainGraph.MainGraph.AdjMatrix *= activCount;
-            
-            double upd = LogicGraph.GetW(i, j) + 1;
-            LogicGraph.Update(i, j, ifBin, elseBin, upd);
+            double upd = LogicGraph.GetW(ifBin, elseBin) + 1;
+            LogicGraph.Update(ifBin, elseBin, ifBin.ToString(), elseBin.ToString(), upd);
             activCount++;
-
             LogicGraph.MainGraph.MainGraph.AdjMatrix /= activCount;
 
         }

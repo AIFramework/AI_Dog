@@ -64,6 +64,7 @@
     <Compile Include="Rules\Rule.cs" />
     <Compile Include="Rules\SimpleCalc.cs" />
     <Compile Include="Tools\NumConverter.cs" />
+    <Compile Include="Tools\Simillary.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DataPrep\filters.resx" />

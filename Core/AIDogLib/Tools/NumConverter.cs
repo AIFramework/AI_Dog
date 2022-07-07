@@ -49,13 +49,87 @@ namespace AIDog.Tools
             return ret; 
         }
 
+        /// <summary>
+        /// Перевод из десятичной в двоичную систему
+        /// </summary>
+        /// <param name="decim">Число в десятичной системе</param>
+        public static string DecimalToBinaryStr(this int decim)
+        {
+            return Convert.ToString(decim, 2);
+        }
 
+        /// <summary>
+        /// Перевод из десятичной в двоичную систему
+        /// </summary>
+        /// <param name="decim">Число в десятичной системе</param>
+        public static bool[] DecimalToBinaryBits(this int decim)
+        {
+            return decim.DecimalToBinaryStr().StringToBitArray();
+        }
+
+
+        /// <summary>
+        /// Перевод из десятичной системы в код Грея
+        /// </summary>
+        /// <param name="decim">Число в десятичной системе</param>
+        public static string DecimalToGrayStr(this int decim)
+        {
+            return Convert.ToString(decim ^ (decim >> 1), 2);
+        }
+
+        /// <summary>
+        /// Перевод из десятичной системы в код Грея
+        /// </summary>
+        /// <param name="decim">Число в десятичной системе</param>
+        public static bool[] DecimalToGrayBits(this int decim)
+        {
+            return decim.DecimalToGrayStr().StringToBitArray();
+        }
+
+        /// <summary>
+        /// Перевод из десятичной системы в код Грея
+        /// </summary>
+        /// <param name="decim">Число в десятичной системе</param>
+        public static string DecimalToGrayStr(this int decim, int count)
+        {
+            var str = Convert.ToString(decim ^ (decim >> 1), 2);
+            if (count < str.Length)
+                throw new Exception("Необходимая размерность меньше числа символов кода");
+
+            if(count > str.Length) 
+            {
+                string zeros = new string('0', count - str.Length);
+                str = zeros+ str;
+            }
+
+            return str;
+        }
+
+        /// <summary>
+        /// Перевод из десятичной системы в код Грея
+        /// </summary>
+        /// <param name="decim">Число в десятичной системе</param>
+        public static bool[] DecimalToGrayBits(this int decim, int count)
+        {
+            return decim.DecimalToGrayStr(count).StringToBitArray();
+        }
+
+        /// <summary>
+        /// Декодирование кода Грея в десятичный 
+        /// </summary>
+        /// <param name="binary">Бинарный код Грея</param>
+        /// <returns></returns>
         public static int GrayDecoder(this string binary)
         {
             var ret = binary.StringToBitArray();
             return ret.GrayDecoder();
         }
 
+        /// <summary>
+        /// Декодирование кода Грея в десятичный 
+        /// </summary>
+        /// <param name="binary">Бинарный код Грея</param>
+        /// <returns></returns>
         public static int GrayDecoder(this bool[] binary)
         {
             long bin = 0;

@@ -3,6 +3,7 @@ using AI.ML.Clustering;
 using AIDog.DataPrep.Base;
 using AIDog.DataPrep.Base.Seq1D;
 using AIDog.DataPrep.WordGeneration;
+using AIDog.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,7 +91,7 @@ namespace AIDog.DataPrep
                 // Обучение
                 InitTransformMatrix(); 
                 string newWord = wfv.GetWord(vector);
-                if (newWord != _oldWord) UpdateWord(newWord); // Обновление слов
+                if (newWord != _oldWord) UpdateWord(newWord.GrayDecoder()); // Обновление слов
                 _oldWord = newWord;
                 // Выдача кластера
                 NumCluster = Clustering.Classify(vector);
@@ -134,7 +135,7 @@ namespace AIDog.DataPrep
         /// <summary>
         /// Обновление слов
         /// </summary>
-        public event Action<string> UpdateWord;
+        public event Action<int> UpdateWord;
         /// <summary>
         /// Обновление контрастированных сигналов
         /// </summary>
@@ -148,7 +149,7 @@ namespace AIDog.DataPrep
         // ---------------------------- Заглушки ----------------------------------------//
         // ------------------------------------------------------------------------------//
         private void Signal2Word_IsMatrixInit(bool obj) { }
-        private void Signal2Word_UpdateWord(string obj) { }
+        private void Signal2Word_UpdateWord(int obj) { }
         private void Signal2Word_UpdateSignal(Vector obj) { }
         private void Signal2Word_UpdateContrastSignal(Vector obj) { }
         private void Signal2Word_GetCluster(int obj){}
