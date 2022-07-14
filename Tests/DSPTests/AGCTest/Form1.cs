@@ -29,7 +29,9 @@ namespace AGCTest
 
             generator.PeriodMS = 120;
             generator.freq = 70;
-            generator.A = 10000;
+            generator.A = 200;
+            generator.AdditivNoiseKoef = 100;
+
             generator.Start();
             generator.SignalSemple += Generator_SignalSemple;
         }
