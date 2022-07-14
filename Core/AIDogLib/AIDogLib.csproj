@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algebra\VertexAlgebra.cs" />
     <Compile Include="Blocks\LogicBlock.cs" />
     <Compile Include="DataPrep\Base\Lateral.cs" />
     <Compile Include="DataPrep\Base\Seq1D\AGC.cs" />

@@ -1,4 +1,5 @@
 ﻿using AI.DataStructs.Algebraic;
+using AIDog.Algebra;
 using AIDog.DataPrep.WordGeneration;
 using AIDog.Tools;
 using System;
@@ -14,20 +15,29 @@ namespace WordTest
          
         static void Main(string[] args)
         {
-            Vector v = new Vector(-1, 1, -8);
-            int a = 4;
+
+            int a = 15, b = 734;
+
+            while (true)
+            {
+                Console.WriteLine("Введите число #1");
+                a = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Введите число #2");
+                b = Convert.ToInt32(Console.ReadLine());
 
 
-            var cor = Simillary.CorrelationVectorInt(v, a);
-            var p = Simillary.FuzzyMembership(v, a);
+                var cor = Simillary.CosIntInt(b, a);
+                Console.WriteLine($"Косинус между числами {cor}\n\n");
+                var p = Simillary.FuzzyMembershipIntInt(b, a);
+            }
 
+            //int[] a = { 226, 120, 110, 110, 123 };
+            //Console.WriteLine(VertexAlgebra.Sum(a, 10));
 
-            
+            //string gr = a.DecimalToGrayStr();
+            //Console.WriteLine(gr);
+            //Console.WriteLine(gr.GrayDecoder());
 
-            string gr = a.DecimalToGrayStr();
-            Console.WriteLine(gr);
-            Console.WriteLine(gr.GrayDecoder());
-            
 
         }
     }
