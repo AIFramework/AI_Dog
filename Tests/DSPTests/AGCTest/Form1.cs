@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AI.DataStructs.Algebraic;
+using AI.SignalLab.AGC;
+using AI.SignalLab.AGC.CustomAGC;
 using AI.SignalLab.Generators;
 using AIDog.DataPrep.Base.Seq1D;
 
@@ -17,7 +19,7 @@ namespace AGCTest
     {
 
 
-        RectGenerator generator = new RectGenerator();
+        SineGenerator generator = new SineGenerator();
         Vector data = new Vector(0), agc_dat = new Vector(0);
         AGC aGC = new AGC();
         int counter = 0;
@@ -25,11 +27,11 @@ namespace AGCTest
         public Form1()
         {
             InitializeComponent();
-            aGC.Treshold = 4;
-            aGC.Treshold2 = 4;
+            aGC.Agc = new LogAGC();
+            aGC.Agc.TresholdAGC = 4;
 
             generator.PeriodMS = 50;
-            generator.freq = 40;
+            generator.freq = 20;
             generator.A = 200;
             generator.AdditivNoiseKoef = 20;
             generator.MultiplTrend = 100;

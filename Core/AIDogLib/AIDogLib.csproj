@@ -49,7 +49,6 @@
     <Compile Include="DataPrep\Base\Seq1D\AGC.cs" />
     <Compile Include="DataPrep\Base\Seq1D\AGCVectorAction.cs" />
     <Compile Include="DataPrep\Base\Seq1D\LinearPrediction.cs" />
-    <Compile Include="DataPrep\filters.Designer.cs" />
     <Compile Include="DataPrep\Signal2Word.cs" />
     <Compile Include="DataPrep\WordGeneration\WordFromVectors.cs" />
     <Compile Include="Emotions\DataEmotions.cs" />
@@ -68,16 +67,13 @@
     <Compile Include="Tools\Simillary.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DataPrep\filters.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DataPrep\Resources\filter" />
-    <None Include="DataPrep\Resources\filter_mean_std" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\AIFrameworkOpen\AI\AI.csproj">
       <Project>{5bb9b8ac-9906-4fd7-a8e6-5eb202fb57a1}</Project>
       <Name>AI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\AISignalLabs\AISignalLab\AISignalLab.csproj">
+      <Project>{a94443b7-4b84-4a15-b16c-09474bc5e432}</Project>
+      <Name>AISignalLab</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

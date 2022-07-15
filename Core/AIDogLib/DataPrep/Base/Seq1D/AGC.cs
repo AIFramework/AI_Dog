@@ -1,5 +1,6 @@
 ﻿using AI.DataStructs.Algebraic;
 using AI.DSP.IIR;
+using AI.SignalLab.AGC;
 using System;
 
 namespace AIDog.DataPrep.Base.Seq1D
@@ -7,58 +8,11 @@ namespace AIDog.DataPrep.Base.Seq1D
     [Serializable]
     public class AGC
     {
-        public IIRFilter IIRFilterMean { get; private set; }
-        public IIRFilter IIRFilterSTD { get; private set; }
-
-        public double Treshold {
-            get
-            {
-                return IIRFilterMean.Treshold;
-            }
-            set
-            {
-                IIRFilterMean.Treshold = Treshold;
-                IIRFilterSTD.Treshold = Treshold;
-            }
-        }
-
-        public double Treshold2 { get; set; } = 4;
-
-        public AGC(string path)
-        {
-            IIRFilterMean = IIRFilter.Load(path);
-            IIRFilterSTD = IIRFilter.Load(path);
-            //Treshold = 100;
-        }
-        
-        public AGC()
-        {
-            IIRFilterMean = IIRFilter.Load(filters.filter);
-            IIRFilterSTD = IIRFilter.Load(filters.filter);
-        }
-
-        public AGC(Vector kefA, Vector kefB)
-        {
-            IIRFilterMean = new IIRFilter(kefA, kefB);
-            IIRFilterSTD = new IIRFilter(kefA, kefB);
-        }
+        public IAGC Agc { get; set; } = new DirectAGC();
 
         public double Calculate(double value)
         {
-            var filterValue1 = IIRFilterMean.FilterOutp(value);
-            var dif = (value - filterValue1);
-            var s = dif * dif;
-            var filterValue2 = Math.Abs(IIRFilterSTD.FilterOutp(s));
-            var outp = dif / (Math.Sqrt(filterValue2) + AI.AISettings.GlobalEps);
-
-            //Ограничение сигнала
-            if (outp > Treshold2) outp = Treshold2;
-            else if (outp < -Treshold2) outp = -Treshold2;
-
-
-            //Console.WriteLine(outp);
-
-            return outp;
+            return Agc.Calculate(value);
         }
     }
 }
