@@ -19,7 +19,7 @@ namespace AGCTest
     {
 
 
-        SineGenerator generator = new SineGenerator();
+        RectGenerator generator = new RectGenerator();
         Vector data = new Vector(0), agc_dat = new Vector(0);
         AGC aGC = new AGC();
         int counter = 0;
@@ -28,14 +28,14 @@ namespace AGCTest
         {
             InitializeComponent();
             aGC.Agc = new LogAGC();
-            aGC.Agc.TresholdAGC = 4;
+            aGC.Agc.TresholdAGC = 3;
 
-            generator.PeriodMS = 50;
+            generator.PeriodMS = 150;
             generator.freq = 20;
-            generator.A = 200;
-            generator.AdditivNoiseKoef = 20;
+            generator.A = 20;
+            generator.AdditivNoiseKoef = 2;
             generator.MultiplTrend = 100;
-            generator.AdditivTrend = 60000;
+            generator.AdditivTrend = 15000;
             generator.MultiplNoiseKoef = 0.21;
 
             generator.Start();
