@@ -20,6 +20,7 @@ namespace AGCTest
         RectGenerator generator = new RectGenerator();
         Vector data = new Vector(0), agc_dat = new Vector(0);
         AGC aGC = new AGC();
+        int counter = 0;
 
         public Form1()
         {
@@ -27,10 +28,13 @@ namespace AGCTest
             aGC.Treshold = 4;
             aGC.Treshold2 = 4;
 
-            generator.PeriodMS = 120;
-            generator.freq = 70;
+            generator.PeriodMS = 50;
+            generator.freq = 40;
             generator.A = 200;
-            generator.AdditivNoiseKoef = 100;
+            generator.AdditivNoiseKoef = 20;
+            generator.MultiplTrend = 100;
+            generator.AdditivTrend = 60000;
+            generator.MultiplNoiseKoef = 0.21;
 
             generator.Start();
             generator.SignalSemple += Generator_SignalSemple;
@@ -38,10 +42,12 @@ namespace AGCTest
 
         private void Generator_SignalSemple(double obj)
         {
+ 
             data.Add(obj);
             agc_dat.Add(aGC.Calculate(obj));
             chartVisual1.PlotBlack(data);
             chartVisual2.PlotBlack(agc_dat);
+            counter++;
         }
 
 
