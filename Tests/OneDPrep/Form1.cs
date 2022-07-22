@@ -39,7 +39,7 @@ namespace OneDPrep
             Vector inpX = Vector.OneHotPol(X, regions-1);
             Vector inpY = Vector.OneHotPol(Y, regions-1);
 
-            logic.Push(Vector.Concat(new[] { inpY, inpX, timeEnc.GetCode(t)} ));
+            logic.Push(Vector.Concat(new[] { inpY, inpX }));//, timeEnc.GetCode(t)} ));
             if(ct%1==0) t++;
             ct++;
         }

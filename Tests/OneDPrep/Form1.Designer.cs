@@ -66,23 +66,23 @@ namespace OneDPrep
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.Blue;
             this.label1.Location = new System.Drawing.Point(0, 2);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 17);
+            this.label1.Size = new System.Drawing.Size(126, 17);
             this.label1.TabIndex = 4;
             this.label1.Text = "Погладь песика";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(390, 285);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(147, 20);
+            this.label2.Size = new System.Drawing.Size(180, 20);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Языковая модель";
+            this.label2.Text = "Матрица смежности";
             // 
             // heatMapControl1
             // 
