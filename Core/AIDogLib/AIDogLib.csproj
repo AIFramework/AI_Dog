@@ -57,6 +57,7 @@
     <Compile Include="Graphs\BaseGraph\GraphWithVertex.cs" />
     <Compile Include="Graphs\BaseGraph\Vertex.cs" />
     <Compile Include="Memory\AssociativSimpleMemory.cs" />
+    <Compile Include="Memory\OperativSymbolMemory.cs" />
     <Compile Include="Memory\SensorAndSemanticMemory.cs" />
     <Compile Include="ML\NNW\SimpleAssociativNet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

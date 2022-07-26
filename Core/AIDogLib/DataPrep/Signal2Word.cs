@@ -26,7 +26,7 @@ namespace AIDog.DataPrep
         /// <summary>
         /// Число векторов для первоначального моделирования
         /// </summary>
-        public int NModeler { get; set; } = 20;
+        public int NModeler { get; set; } = 400;
         /// <summary>
         /// Текущий кластер
         /// </summary>
@@ -87,7 +87,7 @@ namespace AIDog.DataPrep
             else if (_iter > NModeler)
             {
                 //Доучивание
-                Clustering.OnlineTuning(vector, 0.001);
+                Clustering.OnlineTuning(vector, 0.0003);
                 // Обучение
                 InitTransformMatrix(); 
                 string newWord = wfv.GetWord(vector);

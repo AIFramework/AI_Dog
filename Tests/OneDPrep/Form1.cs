@@ -1,6 +1,7 @@
 ﻿using AI.DataStructs.Algebraic;
 using AI.ML.DataEncoding.PositionalEncoding;
 using AIDog.Blocks;
+using AIDog.Memory;
 using AIDog.Tools;
 using System;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace OneDPrep
         }
 
         LogicBlock logic = new LogicBlock(50+256, 5);
+        OperativSymbolMemory osm = new OperativSymbolMemory();
 
         private double mX = 0, mY = 0;
         IPositionEncoding timeEnc = new MultiscaleEncoder(256);
@@ -44,6 +46,8 @@ namespace OneDPrep
             ct++;
         }
 
+        
+
         // Сигнал после прореживания
         private void Ava_Update(Vector vector)
         {
@@ -60,6 +64,7 @@ namespace OneDPrep
 
             label3.Text = $"Точность: {logic.Acc}\t Ошибка {logic.Eror}";
             label4.Text = $"Слово: {obj}";
+            osm.Add(obj);
             try
             {
                 heatMapControl1.CalculateHeatMap(logic.LogicGraph.MainGraph.MainGraph.AdjMatrix);
@@ -67,5 +72,17 @@ namespace OneDPrep
             catch { }
         }
 
+
+        /// <summary>
+        /// Выводит состояние памяти
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OperativMemory operativMemory = new OperativMemory();
+            operativMemory.richTextBox1.Text = osm.ToString();
+            operativMemory.ShowDialog();
+        }
     }
 }
