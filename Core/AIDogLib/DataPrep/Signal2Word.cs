@@ -26,7 +26,7 @@ namespace AIDog.DataPrep
         /// <summary>
         /// Число векторов для первоначального моделирования
         /// </summary>
-        public int NModeler { get; set; } = 400;
+        public int NModeler { get; set; } = 1400;
         /// <summary>
         /// Текущий кластер
         /// </summary>
