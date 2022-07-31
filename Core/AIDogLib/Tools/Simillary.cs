@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace AIDog.Tools
 {
+    [Serializable]
     public static class Simillary
     {
         /// <summary>

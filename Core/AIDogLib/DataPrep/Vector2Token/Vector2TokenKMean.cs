@@ -10,12 +10,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AIDog.DataPrep
+namespace AIDog.DataPrep.Vector2Token
 {
     /// <summary>
     /// Перевод сигналов в слова
     /// </summary>
-    public class Signal2Word
+    public class Vector2TokenKMean : IVector2Token
     {
         public KMeans Clustering = new KMeans(5);
         /// <summary>
@@ -48,7 +48,7 @@ namespace AIDog.DataPrep
         /// <summary>
         /// Перевод сигналов в слова
         /// </summary>
-        public Signal2Word(int dimInp, int pow2NWord) 
+        public Vector2TokenKMean(int dimInp, int pow2NWord) 
         {
             ava = new AGCVectorAction(dimInp);
             Clustering = new KMeans(pow2NWord);

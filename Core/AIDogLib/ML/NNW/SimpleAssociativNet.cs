@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AIDog.ML.NNW
 {
+    [Serializable]
     public class SimpleAssociativNet
     {
         public SimpleAssociativNet() 

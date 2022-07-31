@@ -12,6 +12,7 @@ namespace AIDog.Memory
     /// <summary>
     /// Сенсорная и поведенческая память
     /// </summary>
+    [Serializable]
     public class AssociativSimpleMemory
     {
         /// <summary>

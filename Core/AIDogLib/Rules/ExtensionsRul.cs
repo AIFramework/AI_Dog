@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace AIDog.Rules
 {
+    /// <summary>
+    /// Методы расширения для правил
+    /// </summary>
+    [Serializable]
     public static class ExtensionsRules
     {
         /// <summary>

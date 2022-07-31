@@ -9,6 +9,7 @@ namespace AIDog.Tools
     /// <summary>
     /// Преобразование между системами счисления
     /// </summary>
+    [Serializable]
     public static class NumConverter
     {
         /// <summary>

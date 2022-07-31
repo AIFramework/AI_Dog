@@ -1,6 +1,7 @@
 ﻿using AI.DataStructs.Algebraic;
 using AI.Extensions;
 using AIDog.DataPrep;
+using AIDog.DataPrep.Vector2Token;
 using AIDog.Rules;
 using AIDog.Rules.GraphRules;
 using AIDog.Tools;
@@ -15,6 +16,7 @@ namespace AIDog.Blocks
     /// <summary>
     /// Логический блок
     /// </summary>
+    [Serializable]
     public class LogicBlock
     {
         ///// <summary>
@@ -44,7 +46,7 @@ namespace AIDog.Blocks
         /// <summary>
         /// Преобразователь сигнала в текст
         /// </summary>
-        public Signal2Word Signal2Word { get; set; }
+        public IVector2Token Signal2Word { get; set; }
 
 
         private double[] _err = new double[100];
@@ -63,7 +65,7 @@ namespace AIDog.Blocks
             int vertCount = (int)Math.Pow(2, log2DictSize);
             LogicGraph = new GRBase(vertCount);
 
-            Signal2Word = new Signal2Word(dimSensor, log2DictSize);
+            Signal2Word = new Vector2TokenKMean(dimSensor, log2DictSize);
             Signal2Word.UpdateWord += Signal2Word_UpdateWord;
         }
 

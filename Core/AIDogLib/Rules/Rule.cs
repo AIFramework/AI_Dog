@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace AIDog.Rules
 {
+    /// <summary>
+    /// Правила
+    /// </summary>
+    [Serializable]
     public class Rule
     {
         public string IF { get; set; }

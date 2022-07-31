@@ -46,17 +46,21 @@
   <ItemGroup>
     <Compile Include="Algebra\VertexAlgebra.cs" />
     <Compile Include="Blocks\LogicBlock.cs" />
+    <Compile Include="Blocks\Thinking\ActionChoice.cs" />
     <Compile Include="DataPrep\Base\Lateral.cs" />
     <Compile Include="DataPrep\Base\Seq1D\AGC.cs" />
     <Compile Include="DataPrep\Base\Seq1D\AGCVectorAction.cs" />
     <Compile Include="DataPrep\Base\Seq1D\LinearPrediction.cs" />
-    <Compile Include="DataPrep\Signal2Word.cs" />
+    <Compile Include="DataPrep\Vector2Token\Vector2TokenKMean.cs" />
+    <Compile Include="DataPrep\Vector2Token\IVector2Token.cs" />
     <Compile Include="DataPrep\WordGeneration\WordFromVectors.cs" />
     <Compile Include="Emotions\DataEmotions.cs" />
     <Compile Include="Graphs\BaseGraph\Graph.cs" />
     <Compile Include="Graphs\BaseGraph\GraphWithVertex.cs" />
     <Compile Include="Graphs\BaseGraph\Vertex.cs" />
     <Compile Include="Memory\AssociativSimpleMemory.cs" />
+    <Compile Include="Memory\MemoryTools\FragmentMemory.cs" />
+    <Compile Include="Memory\MemoryTools\MemoryContext.cs" />
     <Compile Include="Memory\OperativSymbolMemory.cs" />
     <Compile Include="Memory\SensorAndSemanticMemory.cs" />
     <Compile Include="ML\NNW\SimpleAssociativNet.cs" />

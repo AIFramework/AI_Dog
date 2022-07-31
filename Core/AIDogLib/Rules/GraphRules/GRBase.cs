@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AIDog.Rules.GraphRules
-{   
+{
     /// <summary>
     /// Простая логика на графах
     /// </summary>
+    [Serializable]
     public class GRBase
     {
         public GraphWithVertex MainGraph { get; protected set; }

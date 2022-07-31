@@ -11,6 +11,7 @@ namespace AIDog.Algebra
     /// <summary>
     /// Алгебра вершин
     /// </summary>
+    [Serializable]
     public class VertexAlgebra
     {
         Vector data = new Vector();

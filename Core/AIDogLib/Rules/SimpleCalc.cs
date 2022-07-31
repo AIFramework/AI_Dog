@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace AIDog.Rules
 {
+    /// <summary>
+    /// Простой вывод по правилам
+    /// </summary>
+    [Serializable]
     public class SimpleCalc
     {
         public Rule[] Rules { get; set; }

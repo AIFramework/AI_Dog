@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace AIDog.Memory
 {
+    /// <summary>
+    /// Реализует элемент оперативной символьной памяти без эмоций
+    /// </summary>
+    [Serializable]
     public class OperativSymbolMemoryElement 
     { 
         /// <summary>
@@ -30,6 +34,7 @@ namespace AIDog.Memory
     /// <summary>
     /// Реализует оперативную символьную память без эмоций
     /// </summary>
+    [Serializable]
     public class OperativSymbolMemory
     {
         public List<OperativSymbolMemoryElement> OperativSymbolMemoryElements = new List<OperativSymbolMemoryElement>();
