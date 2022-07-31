@@ -1,4 +1,5 @@
-﻿using AIDog.Emotions;
+﻿using AI.DataStructs.Data;
+using AIDog.Emotions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace AIDog.Memory.MemoryTools
     /// </summary>
     public class MemoryContext
     {
-        // ToDo: сделать на базе циклического буфера и общего контекста
+        public RingBuffer<int> States = new RingBuffer<int>(5, -1); 
 
 
         /// <summary>
@@ -30,7 +31,13 @@ namespace AIDog.Memory.MemoryTools
         /// <param name="reward">Подкрепление</param>
         public FragmentMemory NewStateInContext(int state, double reward = 0) 
         {
-            throw new Exception("Не реализовано"); 
+            States.AddElement(state);
+
+            FragmentMemory fragment = new FragmentMemory();
+
+            fragment.States = States;
+            fragment.Emotions = CalcEmotions(reward);
+            return fragment;
         }
     }
 }
