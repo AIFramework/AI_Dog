@@ -1,4 +1,5 @@
 ﻿using AI.DataStructs.Data;
+using AIDog.Blocks;
 using AIDog.Emotions;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,22 @@ namespace AIDog.Memory.MemoryTools
     /// </summary>
     public class MemoryContext
     {
-        public RingBuffer<int> States = new RingBuffer<int>(5, -1); 
-
+        public RingBuffer<int> States = new RingBuffer<int>(5, -1);
+        /// <summary>
+        /// Состояние системы (передается по ссылке)
+        /// </summary>
+        public SystemState SystemState { get; set; }
 
         /// <summary>
         /// Рассчет текущей эмоции
         /// </summary>
+        /// <param name="reward">Подкрепление действия</param>
         public DataEmotions CalcEmotions(double reward = 0) 
         {
-            throw new Exception("Не реализовано");
+            if (reward > 0) SystemState.EmoState.Joy += SystemState.KReward*reward;
+            if (reward < 0) SystemState.EmoState.Fear -= SystemState.KReward*reward;
+
+            return SystemState.EmoState;
         }
 
         /// <summary>

@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Algebra\VertexAlgebra.cs" />
     <Compile Include="Blocks\LogicBlock.cs" />
+    <Compile Include="Blocks\SystemState.cs" />
     <Compile Include="Blocks\Thinking\ActionChoice.cs" />
     <Compile Include="DataPrep\Base\Lateral.cs" />
     <Compile Include="DataPrep\Base\Seq1D\AGC.cs" />
